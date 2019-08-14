@@ -7,6 +7,7 @@ import i18n from "./i18n"
 import store from './store'
 import Antd from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.css'
+import './assets/styles/common.css'
 
 Vue.use(Antd);
 

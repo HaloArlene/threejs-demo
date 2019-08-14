@@ -1,10 +1,11 @@
 <template>
   <div>
-    <a-breadcrumb style="margin: 16px 0">
+    <a-breadcrumb style="margin: 12px 0">
       <a-breadcrumb-item>Home</a-breadcrumb-item>
     </a-breadcrumb>
-    <div :style="{ padding: '24px', background: '#fff', minHeight: '360px' }">
-      This project is built to do some study and testing.
+    <div class="main-page">
+      <p>This project is built to do some study and testing.</p>
+      <p>There are some interesting things. <a-button type="primary" @click="go">Get Started</a-button></p>
     </div>
   </div>
 </template>
@@ -14,6 +15,11 @@
             return {
             }
         },
+        methods: {
+            go() {
+                this.$router.push('/i18nDemo')
+            }
+        }
     }
 </script>
 

@@ -1,16 +1,21 @@
 <template>
-  <div class="hello">
-    <h1>{{ $t('title') }}</h1>
-    <h2>{{ $t('hello') }}</h2>
-    <p>{{ $t('welcomeMsg') }}</p>
-    <label>
-      {{ $t('language') }}
-      <select v-model="lang" @change="localeChange">
-        <option value="zh">中文</option>
-        <option value="en">English</option>
-      </select>
-    </label>
-    <router-link to="/vuexDemo">VuexDemo</router-link>
+  <div>
+    <a-breadcrumb style="margin: 12px 0">
+      <a-breadcrumb-item>Demos</a-breadcrumb-item>
+      <a-breadcrumb-item>Vue-I18n Demo</a-breadcrumb-item>
+    </a-breadcrumb>
+    <div class="main-page">
+      <h1>{{ $t('title') }}</h1>
+      <h2>{{ $t('hello') }}</h2>
+      <p>{{ $t('welcomeMsg') }}</p>
+      <label>
+        {{ $t('language') }}
+        <select v-model="lang" @change="localeChange">
+          <option value="zh">中文</option>
+          <option value="en">English</option>
+        </select>
+      </label>
+    </div>
   </div>
 </template>
 
