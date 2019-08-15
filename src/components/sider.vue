@@ -14,7 +14,7 @@
       </a-sub-menu>
       <a-sub-menu key="sub2">
         <span slot="title"><a-icon type="experiment"/><span>Three</span></span>
-        <a-menu-item key="4" @click="routeTo('/three/meshGrid')">Mesh Grid</a-menu-item>
+        <a-menu-item key="4" @click="routeTo('/meshGrid')">Mesh Grid</a-menu-item>
       </a-sub-menu>
       <a-sub-menu
         key="sub3">

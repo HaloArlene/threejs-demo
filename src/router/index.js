@@ -25,16 +25,9 @@ export default new Router({
       component: () => import('@/pages/vuexDemo')
     },
     {
-      path: '/three',
-      name: 'three',
-      component: () => import('@/pages/three/meshGrid'),
-      children: [
-        {
-          path: '/meshGrid',
-          name: 'meshGrid',
-          component: () => import('@/pages/three/meshGrid')
-        }
-      ]
+      path: '/meshGrid',
+      name: 'meshGrid',
+      component: () => import('@/pages/three/meshGrid')
     }
   ]
 })
