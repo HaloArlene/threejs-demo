@@ -15,11 +15,14 @@
       <a-sub-menu key="sub2">
         <span slot="title"><a-icon type="experiment"/><span>Three</span></span>
         <a-menu-item key="4" @click="routeTo('/meshGrid')">Mesh Grid</a-menu-item>
+        <a-menu-item key="5" @click="routeTo('/animationDemo')">Animation Demo</a-menu-item>
+        <a-menu-item key="6" @click="routeTo('/cubeDemo')">Cube Demo</a-menu-item>
+        <a-menu-item key="7" @click="routeTo('/line')">Line</a-menu-item>
       </a-sub-menu>
       <a-sub-menu
         key="sub3">
         <span slot="title"><a-icon type="team"/><span>Team</span></span>
-        <a-menu-item key="6">Team 1</a-menu-item>
+        <a-menu-item key="7">Team 1</a-menu-item>
         <a-menu-item key="8">Team 2</a-menu-item>
       </a-sub-menu>
       <a-menu-item key="9">

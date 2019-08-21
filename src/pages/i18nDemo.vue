@@ -15,6 +15,21 @@
           <option value="en">English</option>
         </select>
       </label>
+
+      <a-form :form="form" @submit="handleSubmit">
+        <a-form-item label="Note" :label-col="{span: 5}" :wrapper-col="{span: 12}">
+          <a-input v-decorator="decorators.note"/>
+        </a-form-item>
+        <a-form-item label="gender" :label-col="{span: 5}" :wrapper-col="{span: 12}">
+          <a-select v-decorator="decorators.gender" placeholder="Select a option and change input text above">
+            <a-select-option value="male">male</a-select-option>
+            <a-select-option value="female">female</a-select-option>
+          </a-select>
+        </a-form-item>
+        <a-form-item :wrapper-col="{span: 12, offset: 5}">
+          <a-button type="primary" html-type="submit">Submit</a-button>
+        </a-form-item>
+      </a-form>
     </div>
   </div>
 </template>
@@ -24,14 +39,29 @@
         name: 'home',
         data() {
             return {
-                lang: localStorage.getItem('locale'),
+                lang: localStorage.getItem('locale') || 'zh',
+                form: this.$form.createForm(this),
+                decorators: {
+                    note: ['note', {rules: [{required: true, message: 'Please input your note!'}]}],
+                    gender: ['gender', {rules: [{required: true, message: 'Please select your gender!'}]}]
+                },
+                formValues: {
+                    note: 'Hello guys',
+                    gender: 'male'
+                }
             }
+        },
+        mounted() {
+            this.form.setFieldsValue(this.formValues);
         },
         methods: {
             localeChange(e) {
                 const lang = e.target.value;
                 localStorage.setItem('locale', lang);
                 this.$i18n.locale = lang;
+            },
+            handleSubmit() {
+
             }
         }
     }

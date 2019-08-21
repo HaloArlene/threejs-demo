@@ -6,12 +6,12 @@ import router from './router'
 import i18n from "./i18n"
 import store from './store'
 import Antd from 'ant-design-vue'
+console.log(Antd)
 import 'ant-design-vue/dist/antd.css'
 import './assets/styles/common.css'
 
-Vue.use(Antd);
-
 Vue.config.productionTip = false;
+Vue.use(Antd);
 
 /* eslint-disable no-new */
 new Vue({

@@ -28,6 +28,26 @@ export default new Router({
       path: '/meshGrid',
       name: 'meshGrid',
       component: () => import('@/pages/three/meshGrid')
+    },
+    {
+      path: '/animationDemo',
+      name: 'animationDemo',
+      component: () => import('@/pages/three/animationDemo')
+    },
+    {
+      path: '/cubeDemo',
+      name: 'cubeDemo',
+      component: () => import('@/pages/three/cubeDemo')
+    },
+    {
+      path: '/modelRender',
+      name: 'modelRender',
+      component: () => import('@/pages/three/modelRender')
+    },
+    {
+      path: '/line',
+      name: 'line',
+      component: () => import('@/pages/three/line')
     }
   ]
 })
