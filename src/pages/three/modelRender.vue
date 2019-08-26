@@ -4,6 +4,14 @@
       <a-breadcrumb-item>Three</a-breadcrumb-item>
       <a-breadcrumb-item>Model Rendering</a-breadcrumb-item>
     </a-breadcrumb>
+
+    <a-upload name="file" :multiple="false" @change="handleChange" :beforeUpload="beforeUpload">
+      <a-button>
+        <a-icon type="upload"/>
+        Click to Upload
+      </a-button>
+    </a-upload>
+
     <div class="main-page">
       <div class="three-canvas-frame" id="canvas-frame"></div>
     </div>
@@ -11,7 +19,7 @@
 </template>
 
 <script>
-  import * as THREE from 'three'
+  import ModelLoader from "./js/modelLoader";
 
   export default {
     name: "modelRender",
@@ -19,11 +27,16 @@
       return {}
     },
     mounted() {
-      this.initThree();
+
     },
     methods: {
-      initThree() {
+      handleChange() {
 
+      },
+      beforeUpload(file) {
+        console.log(file);
+        const loader = new ModelLoader('canvas-frame');
+        loader.renderFromFile(file);
       }
     }
   }

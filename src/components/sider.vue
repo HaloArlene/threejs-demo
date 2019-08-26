@@ -18,12 +18,13 @@
         <a-menu-item key="5" @click="routeTo('/animationDemo')">Animation Demo</a-menu-item>
         <a-menu-item key="6" @click="routeTo('/cubeDemo')">Cube Demo</a-menu-item>
         <a-menu-item key="7" @click="routeTo('/line')">Line</a-menu-item>
+        <a-menu-item key="8" @click="routeTo('/modelRender')">Model Render</a-menu-item>
       </a-sub-menu>
       <a-sub-menu
         key="sub3">
         <span slot="title"><a-icon type="team"/><span>Team</span></span>
-        <a-menu-item key="7">Team 1</a-menu-item>
-        <a-menu-item key="8">Team 2</a-menu-item>
+        <a-menu-item key="9">Team 1</a-menu-item>
+        <a-menu-item key="10">Team 2</a-menu-item>
       </a-sub-menu>
       <a-menu-item key="9">
         <a-icon type="file"/>
