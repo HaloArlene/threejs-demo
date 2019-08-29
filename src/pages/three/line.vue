@@ -2,7 +2,7 @@
   <div>
     <a-breadcrumb>
       <a-breadcrumb-item>Three</a-breadcrumb-item>
-      <a-breadcrumb-item>Model Rendering</a-breadcrumb-item>
+      <a-breadcrumb-item>Line</a-breadcrumb-item>
     </a-breadcrumb>
     <div class="main-page">
       <div class="three-canvas-frame" id="canvas-frame"></div>

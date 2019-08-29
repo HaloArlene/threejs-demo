@@ -2,23 +2,24 @@ import * as THREE from 'three';
 
 export default {
   data() {
-    return {
-      renderer: null,
-      camera: null,
-      scene: null
-    }
+    return {}
   },
   methods: {
     getSize() {
       const frame = document.getElementById('canvas-frame');
+      const width = frame.clientWidth;
+      const height = frame.clientHeight;
       return {
-        width: frame.clientWidth,
-        height: frame.clientHeight
+        width,
+        height,
+        aspect: width / height
       }
     },
     createRenderer() {
       const {width, height} = this.getSize();
       const renderer = new THREE.WebGLRenderer({antialias: true});
+      renderer.setPixelRatio(window.devicePixelRatio);
+      renderer.gammaOutput = true;
       renderer.setSize(width, height);
       document.getElementById('canvas-frame').appendChild(renderer.domElement);
       renderer.setClearColor(0xFFFFFF, 1.0);
@@ -30,6 +31,10 @@ export default {
     createCamera(fov, near, far) {
       const {width, height} = this.getSize();
       return new THREE.PerspectiveCamera(fov, width / height, near, far);
+    },
+    createControls(camera, renderer) {
+      const OrbitControls = require('three-orbitcontrols');
+      return new OrbitControls(camera, renderer.domElement);
     }
   }
 }

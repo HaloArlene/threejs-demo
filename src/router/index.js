@@ -11,43 +11,43 @@ export default new Router({
     },
     {
       path: '/home',
-      name: 'home',
       component: () => import('@/pages/home')
     },
     {
       path: '/i18nDemo',
-      name: 'I18nDemo',
       component: () => import('@/pages/i18nDemo')
     },
     {
       path: '/vuexDemo',
-      name: 'VuexDemo',
       component: () => import('@/pages/vuexDemo')
     },
     {
       path: '/meshGrid',
-      name: 'meshGrid',
       component: () => import('@/pages/three/meshGrid')
     },
     {
       path: '/animationDemo',
-      name: 'animationDemo',
       component: () => import('@/pages/three/animationDemo')
     },
     {
       path: '/cubeDemo',
-      name: 'cubeDemo',
       component: () => import('@/pages/three/cubeDemo')
     },
     {
       path: '/modelRender',
-      name: 'modelRender',
       component: () => import('@/pages/three/modelRender')
     },
     {
       path: '/line',
-      name: 'line',
       component: () => import('@/pages/three/line')
+    },
+    {
+      path: '/light1',
+      component: () => import('@/pages/three/light1')
+    },
+    {
+      path: '/texture',
+      component: () => import('@/pages/three/texture')
     }
   ]
 })

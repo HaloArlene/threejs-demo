@@ -11,5 +11,8 @@
 </script>
 
 <style lang="less" scoped>
-
+  .ant-layout-header {
+    height: 50px;
+    line-height: 50px;
+  }
 </style>

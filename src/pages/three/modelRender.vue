@@ -8,7 +8,7 @@
     <a-upload name="file" :multiple="false" @change="handleChange" :beforeUpload="beforeUpload">
       <a-button>
         <a-icon type="upload"/>
-        Click to Upload
+        Click to Upload (.stl file)
       </a-button>
     </a-upload>
 

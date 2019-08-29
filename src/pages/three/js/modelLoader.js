@@ -19,6 +19,7 @@ export default class ModelLoader {
   renderFromFile(file) {
     this.onFileLoaded(geometry => {
       geometry.sourceFile = file.ETag;
+
       const mesh = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({color: 0xff5533, side: THREE.DoubleSide}));
       mesh.position.set(0, 0, 0);
       mesh.rotation.x = -Math.PI / 2;
@@ -28,7 +29,7 @@ export default class ModelLoader {
       this.scene.add(this.camera);
 
       //X轴红色, Y轴绿色, Z轴蓝色
-      this.scene.add(new THREE.AxesHelper(800));
+      this.scene.add(new THREE.AxesHelper(600));
 
       this.scene.add(new THREE.GridHelper(300, 40, 0x000055, 0xFFFFFF));
       this.initBboxHelper(mesh);
@@ -52,7 +53,7 @@ export default class ModelLoader {
     }
 
     /* 窗口变化时视图更新 */
-    window.addEventListener('resize',  this.enlargeMax, false);
+    window.addEventListener('resize', this.enlargeMax, false);
   }
 
   //全屏
@@ -95,6 +96,7 @@ export default class ModelLoader {
 
   /* 灯光 */
   initLights() {
+    //方向光
     const light = new THREE.DirectionalLight(0xFFFFFF);
     light.position.set(0, 99, 0).normalize();
     this.scene.add(light);
@@ -125,6 +127,7 @@ export default class ModelLoader {
   createRenderer() {
     const {width, height} = this.size;
     const renderer = new THREE.WebGLRenderer({antialias: true});
+    renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(width, height);
     renderer.setClearColor(new THREE.Color(0x66666));
     renderer.gammaInput = true;
