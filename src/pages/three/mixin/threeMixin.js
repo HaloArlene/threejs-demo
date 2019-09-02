@@ -7,8 +7,8 @@ export default {
   methods: {
     getSize() {
       const frame = document.getElementById('canvas-frame');
-      const width = frame.clientWidth;
-      const height = frame.clientHeight;
+      const width = frame.offsetWidth;
+      const height = frame.offsetHeight;
       return {
         width,
         height,
@@ -29,8 +29,7 @@ export default {
       return new THREE.Scene();
     },
     createCamera(fov, near, far) {
-      const {width, height} = this.getSize();
-      return new THREE.PerspectiveCamera(fov, width / height, near, far);
+      return new THREE.PerspectiveCamera(fov, this.getSize().aspect, near, far);
     },
     createControls(camera, renderer) {
       const OrbitControls = require('three-orbitcontrols');

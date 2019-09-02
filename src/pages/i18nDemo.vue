@@ -20,7 +20,7 @@
         <a-form-item label="Note" :label-col="{span: 5}" :wrapper-col="{span: 12}">
           <a-input v-decorator="decorators.note"/>
         </a-form-item>
-        <a-form-item label="gender" :label-col="{span: 5}" :wrapper-col="{span: 12}">
+        <a-form-item label="Gender" :label-col="{span: 5}" :wrapper-col="{span: 12}">
           <a-select v-decorator="decorators.gender" placeholder="Select a option and change input text above">
             <a-select-option value="male">male</a-select-option>
             <a-select-option value="female">female</a-select-option>

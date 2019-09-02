@@ -26,7 +26,7 @@
         const camera = this.createCamera(50, 1, 2000);
         camera.position.z = 500;
 
-        const geometry = new THREE.BoxBufferGeometry( 200, 200, 200 );
+        const geometry = new THREE.BoxBufferGeometry(200, 200, 200);
         const material = new THREE.MeshBasicMaterial();
         const mesh = new THREE.Mesh(geometry, material);
         scene.add(mesh);

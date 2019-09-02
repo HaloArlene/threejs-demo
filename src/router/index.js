@@ -48,6 +48,10 @@ export default new Router({
     {
       path: '/texture',
       component: () => import('@/pages/three/texture')
+    },
+    {
+      path: '/geometries',
+      component: () => import('@/pages/three/geometries')
     }
   ]
 })

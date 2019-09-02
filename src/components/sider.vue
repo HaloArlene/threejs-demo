@@ -1,55 +1,69 @@
 <template>
-  <a-layout-sider
-    collapsible
-    v-model="collapsed">
-    <div class="logo"/>
-    <a-menu theme="dark" :defaultSelectedKeys="['1']" mode="inline">
-      <a-menu-item key="1" @click="routeTo('/home')">
-        <a-icon type="home"/><span>Home</span>
-      </a-menu-item>
-      <a-sub-menu key="sub1">
-        <span slot="title"><a-icon type="tags"/><span>Demos</span></span>
-        <a-menu-item key="1-1" @click="routeTo('/i18nDemo')">Vue-I18n Demo</a-menu-item>
-        <a-menu-item key="1-2" @click="routeTo('/vuexDemo')">Vuex Demo</a-menu-item>
-      </a-sub-menu>
-      <a-sub-menu key="sub2">
-        <span slot="title"><a-icon type="experiment"/><span>Three</span></span>
-        <a-menu-item key="2-1" @click="routeTo('/meshGrid')">Mesh Grid</a-menu-item>
-        <a-menu-item key="2-2" @click="routeTo('/animationDemo')">Animation Demo</a-menu-item>
-        <a-menu-item key="2-3" @click="routeTo('/cubeDemo')">Cube Demo</a-menu-item>
-        <a-menu-item key="2-4" @click="routeTo('/line')">Line</a-menu-item>
-        <a-menu-item key="2-5" @click="routeTo('/modelRender')">Model Render</a-menu-item>
-        <a-menu-item key="2-6" @click="routeTo('/light1')">Light</a-menu-item>
-        <a-menu-item key="2-7" @click="routeTo('/texture')">Texture</a-menu-item>
-      </a-sub-menu>
-      <a-sub-menu
-        key="sub3">
-        <span slot="title"><a-icon type="team"/><span>Team</span></span>
-        <a-menu-item key="3-1">Team 1</a-menu-item>
-        <a-menu-item key="3-2">Team 2</a-menu-item>
-      </a-sub-menu>
-      <a-menu-item key="9">
-        <a-icon type="file"/>
-        <span>File</span>
-      </a-menu-item>
+  <a-layout-sider collapsible v-model="collapsed">
+    <div class="logo"></div>
+    <a-menu theme="dark" :defaultSelectedKeys="['sub0']" :selectedKeys="selectedKeys"
+            :defaultOpenKeys="['sub2']" mode="inline" @click="clickItem">
+      <template v-for="(menu, menuIndex) in menuConfig">
+        <a-menu-item v-if="!menu.children" :key="menu.key" @click="routeTo(menu.path)">
+          <a-icon :type="menu.icon"></a-icon>
+          <span>{{ menu.title }}</span>
+        </a-menu-item>
+        <a-sub-menu v-else :key="menu.key">
+          <span slot="title">
+            <a-icon :type="menu.icon"></a-icon>
+            <span>{{ menu.title }}</span>
+          </span>
+          <a-menu-item v-for="(item, itemIndex) in menu.children" :key="`${menuIndex}-${itemIndex}`"
+                       @click="routeTo(item.path)">{{ item.title }}
+          </a-menu-item>
+        </a-sub-menu>
+      </template>
     </a-menu>
   </a-layout-sider>
 </template>
 
 <script>
-    export default {
-        name: "sider",
-        data() {
-            return {
-                collapsed: false,
-            }
-        },
-        methods: {
-            routeTo(path) {
-                this.$router.push(path);
-            }
-        }
+  export default {
+    name: "sider",
+    data() {
+      return {
+        collapsed: false,
+        selectedKeys: ['sub0'],
+        menuConfig: [
+          {
+            key: 'sub0', path: '/home', icon: 'home', title: 'Home'
+          },
+          {
+            key: 'sub2', icon: 'experiment', title: 'Three', children: [
+              {path: '/line', title: 'Line'},
+              {path: '/meshGrid', title: 'Mesh Grid'},
+              {path: '/geometries', title: 'Geometries'},
+              {path: '/light1', title: 'Light'},
+              {path: '/animationDemo', title: 'Animation Demo'},
+              {path: '/cubeDemo', title: 'Cube Demo'},
+              {path: '/modelRender', title: 'Model Render'},
+              {path: '/texture', title: 'Texture'},
+            ]
+          },
+          {
+            key: 'sub1', icon: 'tags', title: 'Demos', children: [
+              {path: '/i18nDemo', title: 'Vue-I18n Demo'},
+              {path: '/vuexDemo', title: 'Vuex Demo'}
+            ]
+          },
+        ]
+      }
+    },
+    methods: {
+      routeTo(path) {
+        this.$router.push(path);
+      },
+      clickItem({item, key, keyPath}) {
+        this.selectedKeys = [key];
+      },
+
     }
+  }
 </script>
 
 <style scoped>
