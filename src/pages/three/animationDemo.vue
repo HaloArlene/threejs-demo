@@ -1,20 +1,19 @@
 <template>
   <div>
-    <a-breadcrumb>
-      <a-breadcrumb-item>Three</a-breadcrumb-item>
-      <a-breadcrumb-item>Animation Demo</a-breadcrumb-item>
-    </a-breadcrumb>
+    <breadcrumb :crumbs="['Three', 'Animation']"/>
     <div class="main-page">
-      <div id="canvas-frame"></div>
+      <div class="three-canvas-frame" id="canvas-frame"></div>
     </div>
   </div>
 </template>
 
 <script>
   import * as THREE from 'three'
+  import Breadcrumb from "../../components/breadcrumb";
 
   export default {
     name: "animation",
+    components: {Breadcrumb},
     data() {
       return {
         renderer: null,
@@ -89,13 +88,3 @@
     }
   }
 </script>
-
-<style scoped>
-  div#canvas-frame {
-    border: none;
-    cursor: pointer;
-    width: 100%;
-    height: 600px;
-    background-color: #EEEEEE;
-  }
-</style>

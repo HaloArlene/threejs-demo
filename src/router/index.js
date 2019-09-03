@@ -52,6 +52,10 @@ export default new Router({
     {
       path: '/geometries',
       component: () => import('@/pages/three/geometries')
+    },
+    {
+      path: '/material',
+      component: () => import('@/pages/three/material')
     }
   ]
 })

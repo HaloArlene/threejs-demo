@@ -1,14 +1,11 @@
 <template>
   <div>
-    <a-breadcrumb>
-      <a-breadcrumb-item>Three</a-breadcrumb-item>
-      <a-breadcrumb-item>Model Rendering</a-breadcrumb-item>
-    </a-breadcrumb>
+   <breadcrumb :crumbs="['Three', 'Model Renderer']"/>
 
     <a-upload name="file" :multiple="false" @change="handleChange" :beforeUpload="beforeUpload">
       <a-button>
         <a-icon type="upload"/>
-        Click to Upload (.stl file)
+        Click to Upload (.stl file only)
       </a-button>
     </a-upload>
 
@@ -20,15 +17,10 @@
 
 <script>
   import ModelLoader from "./js/modelLoader";
+  import Breadcrumb from "../../components/breadcrumb";
 
   export default {
-    name: "modelRender",
-    data() {
-      return {}
-    },
-    mounted() {
-
-    },
+    components: {Breadcrumb},
     methods: {
       handleChange() {
 
@@ -41,7 +33,3 @@
     }
   }
 </script>
-
-<style scoped>
-
-</style>

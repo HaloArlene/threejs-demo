@@ -1,9 +1,6 @@
 <template>
   <div>
-    <a-breadcrumb>
-      <a-breadcrumb-item>Three</a-breadcrumb-item>
-      <a-breadcrumb-item>Line</a-breadcrumb-item>
-    </a-breadcrumb>
+    <breadcrumb :crumbs="['Three', 'Line']"/>
     <div class="main-page">
       <div class="three-canvas-frame" id="canvas-frame"></div>
     </div>
@@ -12,9 +9,11 @@
 
 <script>
   import * as THREE from 'three'
+  import Breadcrumb from "../../components/breadcrumb";
 
   export default {
     name: "modelRender",
+    components: {Breadcrumb},
     data() {
       return {}
     },
@@ -28,8 +27,8 @@
         const height = frame.clientHeight;
 
         const camera = new THREE.PerspectiveCamera(45, width / height, 1, 500);
-        camera.position.set( 0, 0, 50 );
-        camera.lookAt( 0, 0, 0 );
+        camera.position.set(0, 0, 50);
+        camera.lookAt(0, 0, 0);
 
         const renderer = new THREE.WebGLRenderer();
         renderer.setSize(width, height);
@@ -59,7 +58,3 @@
     }
   }
 </script>
-
-<style scoped>
-
-</style>
