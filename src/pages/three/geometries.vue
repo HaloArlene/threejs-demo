@@ -1,9 +1,6 @@
 <template>
   <div>
-    <a-breadcrumb>
-      <a-breadcrumb-item>Three</a-breadcrumb-item>
-      <a-breadcrumb-item>Geometries</a-breadcrumb-item>
-    </a-breadcrumb>
+    <breadcrumb :crumbs="['Three', 'Geometries']"/>
     <a-layout>
       <a-layout-sider width="200" style="background: #fff">
         <a-menu theme="light" mode="inline" :defaultSelectedKeys="['0']" :selectedKeys="selectedKeys"
@@ -19,15 +16,16 @@
         </a-layout-content>
       </a-layout>
     </a-layout>
-
   </div>
 </template>
 
 <script>
   import * as THREE from 'three';
   import threeMixin from "./mixin/threeMixin";
+  import Breadcrumb from "../../components/breadcrumb";
 
   export default {
+    components: {Breadcrumb},
     mixins: [threeMixin],
     data() {
       return {
@@ -36,11 +34,6 @@
             'Box', 'Plane', 'Sphere', 'Sphere 2', 'Sphere 3', 'Sphere 4', 'Sphere 5', 'Circle', 'Cylinder', 'Cylinder 2',
             'Tetrahedron', 'Octahedron', 'Icosahedron', 'Torus', 'Torus 2', 'Torus 3', 'Torus Knot'
         ],
-        renderer: null,
-        camera: null,
-        scene: null,
-        mesh: null,
-        controls: null,
         geometryType: 'box'
       }
     },

@@ -2,7 +2,15 @@ import * as THREE from 'three';
 
 export default {
   data() {
-    return {}
+    return {
+      camera: null,
+      scene: null,
+      renderer: null,
+      geometry: null,
+      material: null,
+      mesh: null,
+      controls: null
+    }
   },
   methods: {
     getSize() {
@@ -15,14 +23,14 @@ export default {
         aspect: width / height
       }
     },
-    createRenderer() {
+    createRenderer(clearColor = 0xFFFFFF) {
       const {width, height} = this.getSize();
       const renderer = new THREE.WebGLRenderer({antialias: true});
       renderer.setPixelRatio(window.devicePixelRatio);
       renderer.gammaOutput = true;
       renderer.setSize(width, height);
       document.getElementById('canvas-frame').appendChild(renderer.domElement);
-      renderer.setClearColor(0xFFFFFF, 1.0);
+      renderer.setClearColor(clearColor, 1.0);
       return renderer;
     },
     createScene() {

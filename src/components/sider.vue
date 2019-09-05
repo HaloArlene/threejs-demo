@@ -36,11 +36,12 @@
           {
             key: 'sub2', icon: 'experiment', title: 'Three', children: [
               {path: '/line', title: 'Line'},
-              {path: '/meshGrid', title: 'Mesh Grid'},
+              {path: '/meshGrid', title: 'Grid'},
               {path: '/geometries', title: 'Geometries'},
+              {path: '/material', title: 'Material'},
               {path: '/light1', title: 'Light'},
-              {path: '/animationDemo', title: 'Animation Demo'},
-              {path: '/cubeDemo', title: 'Cube Demo'},
+              {path: '/animationDemo', title: 'Animation'},
+              {path: '/cubeDemo', title: 'Cube'},
               {path: '/modelRender', title: 'Model Render'},
               {path: '/texture', title: 'Texture'},
             ]
@@ -61,11 +62,6 @@
       clickItem({item, key, keyPath}) {
         this.selectedKeys = [key];
       },
-
     }
   }
 </script>
-
-<style scoped>
-
-</style>

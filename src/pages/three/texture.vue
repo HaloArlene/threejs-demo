@@ -1,9 +1,6 @@
 <template>
   <div>
-    <a-breadcrumb>
-      <a-breadcrumb-item>Three</a-breadcrumb-item>
-      <a-breadcrumb-item>Texture</a-breadcrumb-item>
-    </a-breadcrumb>
+    <breadcrumb :crumbs="['Three', 'Texture']"/>
     <div class="main-page">
       <div class="three-canvas-frame" id="canvas-frame"></div>
     </div>
@@ -13,8 +10,10 @@
 <script>
   import threeMixin from "./mixin/threeMixin";
   import * as THREE from 'three';
+  import Breadcrumb from "../../components/breadcrumb";
 
   export default {
+    components: {Breadcrumb},
     mixins: [threeMixin],
     mounted() {
       this.initThree();
@@ -44,7 +43,3 @@
     }
   }
 </script>
-
-<style scoped>
-
-</style>
