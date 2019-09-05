@@ -15,11 +15,11 @@ export default new Router({
     },
     {
       path: '/i18nDemo',
-      component: () => import('@/pages/i18nDemo')
+      component: () => import('@/pages/demos/i18nDemo')
     },
     {
       path: '/vuexDemo',
-      component: () => import('@/pages/vuexDemo')
+      component: () => import('@/pages/demos/vuexDemo')
     },
     {
       path: '/meshGrid',

@@ -34,11 +34,6 @@
             'Box', 'Plane', 'Sphere', 'Sphere 2', 'Sphere 3', 'Sphere 4', 'Sphere 5', 'Circle', 'Cylinder', 'Cylinder 2',
             'Tetrahedron', 'Octahedron', 'Icosahedron', 'Torus', 'Torus 2', 'Torus 3', 'Torus Knot'
         ],
-        renderer: null,
-        camera: null,
-        scene: null,
-        mesh: null,
-        controls: null,
         geometryType: 'box'
       }
     },

@@ -65,8 +65,8 @@ export default class ModelLoader {
       }
 
       this.controls = new OrbitControls(this.camera, this.renderer.domElement);
-      this.controls.maxPolarAngle = 0.5 * Math.PI / 2;
-      this.controls.enableZoom = false;
+      this.controls.maxPolarAngle = Math.PI;
+      this.controls.enableZoom = true;
 
       let i =1;
       this.scene.position.y = config.sceneTranslateY;

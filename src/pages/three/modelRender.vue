@@ -16,7 +16,7 @@
 </template>
 
 <script>
-  import ModelLoader from "./js/modelLoader";
+  import ModelLoader from "../../utils/modelLoader";
   import Breadcrumb from "../../components/breadcrumb";
 
   export default {
