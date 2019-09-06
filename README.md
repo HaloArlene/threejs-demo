@@ -1,8 +1,10 @@
-# i18n-demo
+# threejs-demo
 
 > A Vue.js project
 
 ## Build Setup
+
+This demo is built to do some test and study about how to use Three.js in Vue.js project.
 
 ``` bash
 # install dependencies
