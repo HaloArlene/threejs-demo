@@ -2,7 +2,7 @@
   <a-layout-sider collapsible v-model="collapsed">
     <div class="logo"></div>
     <a-menu theme="dark" :defaultSelectedKeys="['sub0']" :selectedKeys="selectedKeys"
-            :defaultOpenKeys="['sub2']" mode="inline" @click="clickItem">
+            :defaultOpenKeys="['sub1']" mode="inline" @click="clickItem">
       <template v-for="(menu, menuIndex) in menuConfig">
         <a-menu-item v-if="!menu.children" :key="menu.key" @click="routeTo(menu.path)">
           <a-icon :type="menu.icon"></a-icon>
@@ -34,20 +34,21 @@
             key: 'sub0', path: '/home', icon: 'home', title: 'Home'
           },
           {
-            key: 'sub2', icon: 'experiment', title: 'Three', children: [
+            key: 'sub1', icon: 'experiment', title: 'Three', children: [
               {path: '/line', title: 'Line'},
               {path: '/meshGrid', title: 'Grid'},
               {path: '/geometries', title: 'Geometries'},
               {path: '/material', title: 'Material'},
+              {path: '/animation', title: 'Animation'},
               {path: '/texture', title: 'Texture'},
               {path: '/light1', title: 'Light'},
-              {path: '/animationDemo', title: 'Animation'},
+              {path: '/animationDemo', title: 'Animation 2'},
               {path: '/cubeDemo', title: 'Cube'},
               {path: '/modelRender', title: 'Model Render'},
             ]
           },
           {
-            key: 'sub1', icon: 'tags', title: 'Demos', children: [
+            key: 'sub2', icon: 'tags', title: 'Demos', children: [
               {path: '/i18nDemo', title: 'Vue-I18n Demo'},
               {path: '/vuexDemo', title: 'Vuex Demo'}
             ]

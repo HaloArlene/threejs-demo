@@ -36,7 +36,14 @@
         scene.add(cube);
       });
 
+      const Stats = require('stats.js');
+      const stats = new Stats();
+      stats.showPanel(1);
+      stats.dom.style.position = 'absolute';
+      document.getElementById('canvas-frame').appendChild(stats.dom);
+
       const animation = time => {
+        stats.begin();
         time *= 0.001;
         cubes.forEach((cube, index) => {
           const speed = 1 + index * .1;
@@ -45,6 +52,7 @@
           cube.rotation.y = rot;
         });
         renderer.render(scene, camera);
+        stats.end();
         requestAnimationFrame(animation);
       };
       animation();

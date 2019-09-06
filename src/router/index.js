@@ -56,6 +56,10 @@ export default new Router({
     {
       path: '/material',
       component: () => import('@/pages/three/material')
+    },
+    {
+      path: '/animation',
+      component: () => import('@/pages/three/animation')
     }
   ]
 })

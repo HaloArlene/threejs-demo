@@ -41,19 +41,18 @@
     },
     methods: {
       initThree() {
-        this.camera = this.createCamera(45, 0.1, 50);
+        this.camera = this.createCamera(45, 0.1, 20);
         this.camera.position.set(4, 5, 8);
         this.camera.lookAt(0, 0, 0);
 
         this.scene = this.createScene();
         this.scene.add(this.camera);
 
-        this.scene.add(new THREE.AmbientLight(0xFFFFFF));
         const pointLight = new THREE.PointLight(0xFFFFFF);
         pointLight.position.set(3, 1, 3);
         this.scene.add(pointLight);
-        const directionalLight = new THREE.DirectionalLight(0xFFFFFF);
-        directionalLight.position.set(-2, 2, 2.5);
+        const directionalLight = new THREE.DirectionalLight(0xFFFFFF, 1);
+        directionalLight.position.set(-2, 4, 6);
         this.scene.add(directionalLight);
 
         this.scene.add(new THREE.AxesHelper(20));
@@ -82,7 +81,6 @@
       },
       clickItem({item, key, keyPath}) {
         this.selectedKeys = [key];
-        this.mesh.material.dispose();
         if (key < 4) {
           this.mesh.material = this.getMaterial(key);
         }
