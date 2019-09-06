@@ -17,11 +17,15 @@
         },
         methods: {
             go() {
-                this.$router.push('/i18nDemo')
+                this.$router.push('/line')
             }
         }
     }
 </script>
 
 <style>
+  .main-page p {
+    font-size: 16px;
+    font-weight: bold;
+  }
 </style>

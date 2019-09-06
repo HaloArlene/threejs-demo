@@ -19,7 +19,7 @@ const config = {
   gridOption: { //网格
     size: 1000,
     division: 100,
-    color1: 0x000055,
+    color1: 0xFFFFFF,
     color2: 0xFFFFFF
   },
   sceneTranslateY: -150, //场景y轴平移距离
@@ -54,9 +54,10 @@ export default class ModelLoader {
       this.camera.lookAt(this.scene.position);
       this.scene.add(this.camera);
 
-      //X轴红色, Y轴绿色, Z轴蓝色
+
       if (this.control) {
-        this.scene.add(new THREE.AxesHelper(config.axesSize));
+        //X轴红色, Y轴绿色, Z轴蓝色
+        // this.scene.add(new THREE.AxesHelper(config.axesSize));
 
         const {size, division, color1, color2} = config.gridOption;
         this.scene.add(new THREE.GridHelper(size, division, color1, color2));
@@ -89,6 +90,12 @@ export default class ModelLoader {
     } else {
       this.reader.readAsArrayBuffer(file)
     }
+
+    // const _this = this;
+    window.addEventListener('resize', () => {
+      const {width, height} = this.initSize();
+      this.resize(width, height);
+    });
   }
 
   static rebuildObject(mesh) {
@@ -105,11 +112,11 @@ export default class ModelLoader {
     mesh.scale.set(rate, rate, rate);
     //平移
     const box2 = new THREE.Box3().setFromObject(mesh);
-    mesh.position.y = Math.abs(Math.abs(box2.min.y));
+    mesh.position.y -= box2.min.y;
     const ax = (box2.max.x + box2.min.x) / 2;
     const az = (box2.max.z + box2.min.z) / 2;
-    mesh.position.x = -ax;
-    mesh.position.z = -az;
+    mesh.position.x -= ax;
+    mesh.position.z -= az;
     return mesh;
   }
 
@@ -122,7 +129,7 @@ export default class ModelLoader {
 
   //恢复初始尺寸
   recoverSize() {
-    const {width, height} = this.size;
+    const {width, height} = this.initSize();
     this.resize(width, height);
   }
 

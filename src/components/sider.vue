@@ -39,11 +39,11 @@
               {path: '/meshGrid', title: 'Grid'},
               {path: '/geometries', title: 'Geometries'},
               {path: '/material', title: 'Material'},
+              {path: '/texture', title: 'Texture'},
               {path: '/light1', title: 'Light'},
               {path: '/animationDemo', title: 'Animation'},
               {path: '/cubeDemo', title: 'Cube'},
               {path: '/modelRender', title: 'Model Render'},
-              {path: '/texture', title: 'Texture'},
             ]
           },
           {
