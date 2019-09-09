@@ -51,7 +51,8 @@
           {
             key: 'sub2', icon: 'tags', title: 'Demos', children: [
               {path: '/i18nDemo', title: 'Vue-I18n Demo'},
-              {path: '/vuexDemo', title: 'Vuex Demo'}
+              {path: '/vuexDemo', title: 'Vuex Demo'},
+              {path: '/dailyChallenges', title: 'Daily Challenges'}
             ]
           },
         ]

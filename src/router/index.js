@@ -14,16 +14,6 @@ export default new Router({
       component: () => import('@/pages/home')
     },
     {
-      path: '/i18nDemo',
-      component: () => import('@/pages/demos/i18nDemo')
-    },
-    {
-      path: '/vuexDemo',
-      component: () => import('@/pages/demos/vuexDemo')
-    },
-
-
-    {
       path: '/cube',
       component: () => import('@/pages/three/cube')
     },
@@ -59,7 +49,6 @@ export default new Router({
       path: '/animation2',
       component: () => import('@/pages/three/animation2')
     },
-
     {
       path: '/light1',
       component: () => import('@/pages/three/light1')
@@ -68,7 +57,17 @@ export default new Router({
       path: '/texture',
       component: () => import('@/pages/three/texture')
     },
-
-
+    {
+      path: '/i18nDemo',
+      component: () => import('@/pages/demos/i18nDemo')
+    },
+    {
+      path: '/vuexDemo',
+      component: () => import('@/pages/demos/vuexDemo')
+    },
+    {
+      path: '/dailyChallenges',
+      component: () => import('@/pages/demos/dailyChallenges/dailyChallenges')
+    }
   ]
 })

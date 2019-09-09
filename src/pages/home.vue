@@ -5,22 +5,26 @@
     </a-breadcrumb>
     <div class="main-page">
       <p>This project is built to do some study and testing.</p>
-      <p>There are some interesting things. <a-button type="primary" @click="go">Get Started</a-button></p>
+      <p>There are some interesting things.
+        <com-button :text="'Get Started'" @onClick="go"/>
+      </p>
     </div>
   </div>
 </template>
 <script>
-    export default {
-        data() {
-            return {
-            }
-        },
-        methods: {
-            go() {
-                this.$router.push('/line')
-            }
-        }
+  import ComButton from "../components/com-button";
+
+  export default {
+    components: {ComButton},
+    data() {
+      return {}
+    },
+    methods: {
+      go() {
+        this.$router.push('/line')
+      }
     }
+  }
 </script>
 
 <style>
