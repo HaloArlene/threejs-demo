@@ -21,17 +21,11 @@ export default new Router({
       path: '/vuexDemo',
       component: () => import('@/pages/demos/vuexDemo')
     },
+
+
     {
-      path: '/meshGrid',
-      component: () => import('@/pages/three/meshGrid')
-    },
-    {
-      path: '/animationDemo',
-      component: () => import('@/pages/three/animationDemo')
-    },
-    {
-      path: '/cubeDemo',
-      component: () => import('@/pages/three/cubeDemo')
+      path: '/cube',
+      component: () => import('@/pages/three/cube')
     },
     {
       path: '/modelRender',
@@ -42,12 +36,8 @@ export default new Router({
       component: () => import('@/pages/three/line')
     },
     {
-      path: '/light1',
-      component: () => import('@/pages/three/light1')
-    },
-    {
-      path: '/texture',
-      component: () => import('@/pages/three/texture')
+      path: '/meshGrid',
+      component: () => import('@/pages/three/meshGrid')
     },
     {
       path: '/geometries',
@@ -58,8 +48,27 @@ export default new Router({
       component: () => import('@/pages/three/material')
     },
     {
+      path: '/shader',
+      component: () => import('@/pages/three/shader')
+    },
+    {
       path: '/animation',
       component: () => import('@/pages/three/animation')
-    }
+    },
+    {
+      path: '/animation2',
+      component: () => import('@/pages/three/animation2')
+    },
+
+    {
+      path: '/light1',
+      component: () => import('@/pages/three/light1')
+    },
+    {
+      path: '/texture',
+      component: () => import('@/pages/three/texture')
+    },
+
+
   ]
 })
