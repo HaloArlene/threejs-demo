@@ -54,10 +54,6 @@ export default new Router({
       component: () => import('@/pages/three/light1')
     },
     {
-      path: '/texture',
-      component: () => import('@/pages/three/texture')
-    },
-    {
       path: '/i18nDemo',
       component: () => import('@/pages/demos/i18nDemo')
     },
@@ -68,6 +64,10 @@ export default new Router({
     {
       path: '/dailyChallenges',
       component: () => import('@/pages/demos/dailyChallenges/dailyChallenges')
+    },
+    {
+      path: '/volution',
+      component: () => import('@/pages/three/volution')
     }
   ]
 })

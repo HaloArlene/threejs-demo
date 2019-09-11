@@ -61,7 +61,6 @@
         }
       `;
       sandbox.load(frag_code, vert_code);
-      console.log('--sandbox--', sandbox);
 
       const material = new THREE.RawShaderMaterial({
         fragmentShader: sandbox.fragmentString,

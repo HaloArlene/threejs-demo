@@ -42,10 +42,10 @@
               {path: '/shader', title: 'Shader'},
               {path: '/animation', title: 'Animation'},
               {path: '/animation2', title: 'Animation 2'},
-              {path: '/texture', title: 'Texture'},
               {path: '/light1', title: 'Light'},
               {path: '/cube', title: 'Cube'},
               {path: '/modelRender', title: 'Model Render'},
+              {path: '/volution', title: 'Volution'}
             ]
           },
           {
