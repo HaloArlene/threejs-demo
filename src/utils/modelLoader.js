@@ -23,10 +23,27 @@ const config = {
     color2: 0xFFFFFF
   },
   sceneTranslateY: -150, //场景y轴平移距离
-  ambientLightColor: 0x555555,  //环境光颜色
+  ambientLightColor: 0xffffff,  //环境光颜色
   rendererClearColor: 0xCCCCCC,  //渲染器刷新色
   meshBaseSize: 300, //物体尺寸边界
-  defaultMaterial: new THREE.MeshLambertMaterial({color: 0x0066CC, side: THREE.DoubleSide})
+  defaultMaterial: new THREE.MeshPhongMaterial({
+    color: 0xce836c,
+    // flatShading: true,
+    specular: 0xce836c,
+    shininess: 30,
+    vertexColors: THREE.VertexColors,
+    side: THREE.DoubleSide,
+    // wrapRGB: new THREE.Vector3(256, 256, 256),
+    // map: null,
+    // diffuse: 0x0066CC,
+    metal: true,
+    // reflectivity: 1,
+    // roughness: 0,
+    // opacity: 1,
+    // transparent: false,
+    // envMapIntensity: 5,
+    // premultipliedAlpha: true
+  })
 };
 
 export default class ModelLoader {
@@ -58,6 +75,7 @@ export default class ModelLoader {
   }
 
   renderMesh(geometry, material = config.defaultMaterial) {
+    geometry.computeVertexNormals();
     const mesh = new THREE.Mesh(geometry, material);
     this.scene.add(ModelLoader.rebuildObject(mesh));
     this.camera.lookAt(this.scene.position);
@@ -70,12 +88,13 @@ export default class ModelLoader {
       const {size, division, color1, color2} = config.gridOption;
       this.scene.add(new THREE.GridHelper(size, division, color1, color2));
 
-      this.initBboxHelper(mesh);
+      // this.initBboxHelper(mesh);
     }
 
     this.controls = new OrbitControls(this.camera, this.renderer.domElement);
     this.controls.maxPolarAngle = Math.PI;
     this.controls.enableZoom = true;
+
 
     let i =1;
     this.scene.position.y = config.sceneTranslateY;
@@ -161,22 +180,18 @@ export default class ModelLoader {
   /* 灯光 */
   initLights() {
     //方向光
-    this.initDirectionalLight(0, 400, 0);
-    this.initDirectionalLight(0, -400, 0);
-    this.initDirectionalLight(400, 0, 0);
-    this.initDirectionalLight(0, 0, 400);
+    this.initDirectionalLight(0, 300, 0);
+    this.initDirectionalLight(0, -300, 0);
+    this.initDirectionalLight(300, 0, 0);
+    this.initDirectionalLight(0, 0, 300);
     //环境光
     const light2 = new THREE.AmbientLight(config.ambientLightColor);
     this.scene.add(light2);
     //点光源
-    // this.initPointLight(400, 600, 400);
-    // this.initPointLight(400, 600, -400);
-    // this.initPointLight(-400, 600, -400);
-    // this.initPointLight(-400, 600, 400);
-    this.initPointLight(800, 600, 800);
-    this.initPointLight(800, 600, -800);
-    this.initPointLight(-800, 600, -800);
-    this.initPointLight(-800, 600, 800);
+    this.initPointLight(300, 300, 300);
+    this.initPointLight(300, 300, -300);
+    this.initPointLight(-300, 300, -300);
+    this.initPointLight(-300, 300, 300);
   }
 
   //方向光
@@ -188,7 +203,7 @@ export default class ModelLoader {
 
   //点光源
   initPointLight(x, y, z) {
-    const light = new THREE.PointLight(0xFFFFFF, 0.6);
+    const light = new THREE.PointLight(0xFFFFFF, 1);
     light.position.set(x, y, z);
     this.scene.add(light);
   }

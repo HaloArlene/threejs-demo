@@ -69,7 +69,6 @@ module.exports = {
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
       },
-      // ...ThreeExamples
       {
         test: require.resolve('three/examples/js/loaders/DDSLoader'),
         use: 'imports-loader?THREE=three'
