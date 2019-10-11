@@ -1,0 +1,29 @@
+@font-face {font-family: "iconfont";
+  src: url('iconfont.eot?t=1570783778972'); /* IE9 */
+  src: url('iconfont.eot?t=1570783778972#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('data:application/x-font-woff2;charset=utf-8;base64,d09GMgABAAAAAARkAAsAAAAACRAAAAQVAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHEIGVgCDHAqFRIRwATYCJAMQCwoABCAFhG0HUBvqBxEVnOfIfiTYOPK11wepEqW8CR7oO98/szNJl9dbCNy0Tkr4CwoKPYh7uWmHahzCvTBMyfniu3wCnxDWZ99xvk5XqQpZIdsAAQR4Lw5VM89jwflAcZlrYCgXiiY0tgZojNVlpWoBW6uo1gJ2dp82J/A2BGCSm5KIho1bdkRHIS0SgBg5bEg/dJ8SlYIT6JJgzE6FWEkAXVuiPQBWmL8vvqG80EEjIJHuaju40UDqfp78+V3p+R49pYdXnx4Q9oEESgIKxNBYY3+kHSyJxPzEKyoDuqzXoK4B9/O7vs+yxyLU2X95INEQIIJIQpuwFQVyxlgq0xW5kKNBdBfsFRAqfYcOpABfgSiDJM5pxiqCBPMbwJt6QYeGF6ZmymbPeBYPR9s+ieJ1Wud6O3Ou3bTPimS5ksgS4/480eF5IhQfu/966Ebkmne1k/Wtxmw8aNrhw9kDTv9QFmudi+mYYvP1wubeq1kxw2u9TZaledsOnbOcyIUjO0TAimwIrR8aOSJk6HD4IJp3yIxsySLXbw5v9CAceiwdhRnauk0jvEORI1kk/Sxd13Bc0ovQkZpsh/CiiO0fi3VKJLrEITrTFHmoi6tPRDpF+GJex2iU+NM1VnJuPF5h7oXEjhpn6SOJrxps7rayz8gjD5J7NDQntnaMeWXrZvuoRc4O3RN4pxDvVB4ryotyasVKbKTHkL+Gt0PkkYyeGUckV7t3MrwvPT3XP9+cz2V3uvnlyU52rguOn+1Hp7Pv/v52jNvTHfP2d5fO4Sn+9MzGrmSTVS+cYf9oVbJ+zPbjS5HdMegeBiVRMynzgxKyJneGvabHlzWGlmjdpuTQGkn5k/5XeTXeNO+IoSXc/5y2U4Z2FDJNp9krXm3p361Q5wILFhToXKjbXYVm0Byat7pbobsx6IKjuhYKFph/Un39tTop03S6xnXHMxYAPyqvyBIm8T+5VGrhrfJTOfDemUW9JWen90mu+Ztubby6l/cH5Ce7v1WRT8QNwMrNulNYOUvUlyOplHpzVebPpejFreDXAFO2gg9rGu/qMLvg6gW6yAJoZCIXSHQKIhW2JASwqAhBdOqASQk23X5LOs6ZmAEU582AkMIHNElugJTCF6mwPwjIzB+CUsQZTJ1LP9FSWGjWwCEPOIDYQfe0SUUTmJV5QxUX7rwck/BC57UH6qIKRjrc0NWxxifVhCBBOlrhytyHy0JgHE3Yh2IMwbRlKeM+qehpPTANOIgL0AAQdoDWIxup1w5Y6OdvkBItOJdS9EP9ghxPDw/UFFQ5kJ1wy1W0L+O9RGkIAsnOkxyyAq7Qo0UOEsDET5ugXlAwlvAbLSWVk3mFRfvidQu3ASZplUoTUigRIHjNSZ2e+ZFv/RjznsyuyS/9IxOt3lRzOAAAAAA=') format('woff2'),
+  url('iconfont.woff?t=1570783778972') format('woff'),
+  url('iconfont.ttf?t=1570783778972') format('truetype'), /* chrome, firefox, opera, Safari, Android, iOS 4.2+ */
+  url('iconfont.svg?t=1570783778972#iconfont') format('svg'); /* iOS 4.1- */
+}
+
+.iconfont {
+  font-family: "iconfont", serif !important;
+  font-size: 16px;
+  font-style: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-message:before {
+  content: "\e6c4";
+}
+
+.icon-delete:before {
+  content: "\e615";
+}
+
+.icon-face:before {
+  content: "\e60f";
+}
+

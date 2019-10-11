@@ -1,9 +1,6 @@
 <template>
   <div>
-    <a-breadcrumb style="margin: 12px 0">
-      <a-breadcrumb-item>Demos</a-breadcrumb-item>
-      <a-breadcrumb-item>Vue-I18n Demo</a-breadcrumb-item>
-    </a-breadcrumb>
+    <breadcrumb :crumbs="['Demos', 'I18n Demo']"/>
     <div class="main-page">
       <h1>{{ $t('title') }}</h1>
       <h2>{{ $t('hello') }}</h2>
@@ -35,9 +32,11 @@
 </template>
 
 <script>
+    import Breadcrumb from "../../components/breadcrumb";
     export default {
         name: 'home',
-        data() {
+      components: {Breadcrumb},
+      data() {
             return {
                 lang: localStorage.getItem('locale') || 'zh',
                 form: this.$form.createForm(this),
