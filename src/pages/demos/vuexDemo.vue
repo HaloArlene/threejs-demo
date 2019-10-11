@@ -1,9 +1,6 @@
 <template>
     <div>
-      <a-breadcrumb style="margin: 12px 0">
-        <a-breadcrumb-item>Demos</a-breadcrumb-item>
-        <a-breadcrumb-item>Vuex Demo</a-breadcrumb-item>
-      </a-breadcrumb>
+      <breadcrumb :crumbs="['Demos', 'Vuex Demo']"/>
       <div class="main-page">
         <h3>{{ $store.state.count }}</h3>
         <section>
@@ -26,10 +23,12 @@
 
 <script>
     import {mapActions, mapMutations} from "vuex";
+    import Breadcrumb from "../../components/breadcrumb";
 
     export default {
         name: "vuexDemo",
-        methods: {
+      components: {Breadcrumb},
+      methods: {
             ...mapMutations({
                 handleAdd: 'addCount',
                 handleReduce: 'reduceCount'

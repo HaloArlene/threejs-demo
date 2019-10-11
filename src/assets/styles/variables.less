@@ -1,3 +1,89 @@
+@black: #1a1a1a;
 @white: #ffffff;
-@base_blue: #1890ff;
+@base_grey: #cccccc;
+@light_grey: #f5f5f5;
+@lighter_grey: #eeeeee;
+@base_bg_grey: #ebecf0;
+@dark_grey: #aaaaaa;
+@darker_grey: #888888;
+@base_blue: #035eff;
+@dark_blue: #0066cc;
+@base_orange: #ffa333;
+@dark_orange: #f68c1e;
+@base_red: #ff3333;
+
+@mini: 12px;
+@small: 14px;
+@mid: 16px;
+@big: 18px;
+@bigger: 20px;
+@extra_big: 36px;
+
+.full_bg {
+  background-size: 100%;
+  background-position: center;
+}
+
+.full_h_bg {
+  .full_bg;
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+}
+
+.full_w_bg {
+  .full_bg;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+}
+
+.font_mini {
+  font-size: @mini;
+}
+
+.font_small {
+  font-size: @small;
+}
+
+.font_mid {
+  font-size: @mid;
+}
+
+.font_big {
+  font-size: @big;
+}
+
+.float_left {
+  float: left;
+}
+
+.float_right {
+  float: right;
+}
+
+.clear_float:after {
+  content: "";
+  display: block;
+  clear: both;
+}
+
+.tb {
+  display: table;
+  width: 100%;
+
+  .tbc {
+    display: table-cell;
+    vertical-align: middle;
+  }
+}
+
+.txt_r {
+  text-align: right;
+}
+
+.overflow_txt {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 

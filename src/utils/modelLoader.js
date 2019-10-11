@@ -14,7 +14,6 @@ const config = {
     near: 0.1,
     far: 1500
   },
-  meshColor: 0x0066CC,  //物体颜色
   axesSize: 800,  //坐标轴尺寸
   gridOption: { //网格
     size: 1000,
@@ -22,26 +21,26 @@ const config = {
     color1: 0xFFFFFF,
     color2: 0xFFFFFF
   },
-  sceneTranslateY: -150, //场景y轴平移距离
+  sceneTranslateY: -120, //场景y轴平移距离
   ambientLightColor: 0xffffff,  //环境光颜色
   rendererClearColor: 0xCCCCCC,  //渲染器刷新色
   meshBaseSize: 300, //物体尺寸边界
   defaultMaterial: new THREE.MeshPhongMaterial({
-    color: 0xce836c,
-    // flatShading: true,
-    specular: 0xce836c,
-    shininess: 30,
+    color: 0xff6633,  //物体颜色
+    specular: 0xff6633, //高光色
+    flatShading: true,  //是否以平面着色器渲染
+    shininess: 20,  //高光强度，默认30
     vertexColors: THREE.VertexColors,
     side: THREE.DoubleSide,
-    // wrapRGB: new THREE.Vector3(256, 256, 256),
-    // map: null,
-    // diffuse: 0x0066CC,
-    metal: true,
-    // reflectivity: 1,
+    // fog: true,  //雾效，默认true
+    // map: null, //普通贴图
+    // diffuse: 0x0066CC, //漫射颜色
+    // metal: false, //是否是金属
+    // reflectivity: 1, //反射率，默认1
+    // refractionRatio: 0.98,  //折射率，默认0.98
     // roughness: 0,
     // opacity: 1,
     // transparent: false,
-    // envMapIntensity: 5,
     // premultipliedAlpha: true
   })
 };
@@ -58,13 +57,73 @@ export default class ModelLoader {
     this.loader = new STLLoader();
     this.initLights();
     this.control = control;
+    this.material = config.defaultMaterial;
+    this.createRenderScene();
   }
 
-  renderFromFile(file, material = config.defaultMaterial) {
+  createRenderScene() {
+    this.camera.lookAt(this.scene.position);
+    this.scene.add(this.camera);
+
+    this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+    this.controls.maxPolarAngle = Math.PI / 2;
+    this.controls.enableZoom = false;
+
+    if (this.control) {
+      //X轴红色, Y轴绿色, Z轴蓝色
+      // this.scene.add(new THREE.AxesHelper(config.axesSize));
+
+      const {size, division, color1, color2} = config.gridOption;
+      this.scene.add(new THREE.GridHelper(size, division, color1, color2));
+
+      this.initBboxHelper();
+
+      this.controls.maxPolarAngle = Math.PI;
+      this.controls.enableZoom = true;
+    }
+
+    let hasControl = true;
+    this.scene.position.y = config.sceneTranslateY;
+    this.renderer.clear();
+    this.renderer.render(this.scene, this.camera);
+
+    const animate = () => {
+      this.cycleId = requestAnimationFrame(animate);
+      if (this.control || hasControl) {
+        hasControl = false;
+        this.controls.update();
+      }
+      this.renderer.render(this.scene, this.camera);
+    };
+    animate();
+
+    this.handleResize = () => {
+      const {width, height} = this.initSize();
+      this.resize(width, height);
+    };
+    window.addEventListener('resize', this.handleResize);
+  }
+
+  cleanAll() {
+    window.removeEventListener('resize', this.handleResize);
+    cancelAnimationFrame(this.cycleId);
+    this.geometry && this.geometry.dispose();
+    this.material && this.material.dispose();
+    this.scene && this.scene.dispose();
+    this.controls.dispose();
+    this.renderer.dispose();
+    this.renderer.forceContextLoss();
+    this.renderer.context = null;
+    this.renderer.domElement = null;
+    this.renderer = null;
+    console.log('[clean done]');
+  }
+
+  renderFromFile(file) {
     this.reader = new FileReader();
     this.onFileLoaded(geometry => {
       geometry.sourceFile = file.ETag;
-      this.renderMesh(geometry, material);
+      this.renderMesh(geometry);
     });
 
     if (this.reader.readAsBinaryString !== undefined) {
@@ -74,47 +133,13 @@ export default class ModelLoader {
     }
   }
 
-  renderMesh(geometry, material = config.defaultMaterial) {
+  renderMesh(geometry, material = this.material) {
     geometry.computeVertexNormals();
-    const mesh = new THREE.Mesh(geometry, material);
+    this.geometry = geometry;
+    const mesh = new THREE.Mesh(this.geometry, material);
     this.scene.add(ModelLoader.rebuildObject(mesh));
-    this.camera.lookAt(this.scene.position);
-    this.scene.add(this.camera);
-
-    if (this.control) {
-      //X轴红色, Y轴绿色, Z轴蓝色
-      // this.scene.add(new THREE.AxesHelper(config.axesSize));
-
-      const {size, division, color1, color2} = config.gridOption;
-      this.scene.add(new THREE.GridHelper(size, division, color1, color2));
-
-      // this.initBboxHelper(mesh);
-    }
-
-    this.controls = new OrbitControls(this.camera, this.renderer.domElement);
-    this.controls.maxPolarAngle = Math.PI;
-    this.controls.enableZoom = true;
-
-
-    let i =1;
-    this.scene.position.y = config.sceneTranslateY;
     this.renderer.clear();
     this.renderer.render(this.scene, this.camera);
-
-    const animate = () => {
-      requestAnimationFrame(animate);
-      if (this.control || i ===1) {
-        i++;
-        this.controls.update();
-      }
-      this.renderer.render(this.scene, this.camera);
-    };
-    animate();
-
-    window.addEventListener('resize', () => {
-      const {width, height} = this.initSize();
-      this.resize(width, height);
-    });
   }
 
   static rebuildObject(mesh) {
@@ -141,14 +166,13 @@ export default class ModelLoader {
 
   //全屏
   enlargeMax() {
-    const width = window.innerWidth;
-    const height = window.innerHeight;
-    this.resize(width, height);
+    const {innerWidth, innerHeight} = window;
+    this.resize(innerWidth, innerHeight);
   }
 
   //恢复初始尺寸
   recoverSize() {
-    const {width, height} = this.initSize();
+    const {width, height} = this.size;
     this.resize(width, height);
   }
 
@@ -183,15 +207,22 @@ export default class ModelLoader {
     this.initDirectionalLight(0, 300, 0);
     this.initDirectionalLight(0, -300, 0);
     this.initDirectionalLight(300, 0, 0);
+    this.initDirectionalLight(-300, 0, 0);
     this.initDirectionalLight(0, 0, 300);
+    this.initDirectionalLight(0, 0, -300);
+
+    const light = new THREE.SpotLight(0xffff00, 1, 100, Math.PI / 6, 25);
+    light.position.set(0, 400, 0);
+    this.scene.add(light);
+
     //环境光
     const light2 = new THREE.AmbientLight(config.ambientLightColor);
     this.scene.add(light2);
     //点光源
-    this.initPointLight(300, 300, 300);
-    this.initPointLight(300, 300, -300);
-    this.initPointLight(-300, 300, -300);
-    this.initPointLight(-300, 300, 300);
+    this.initPointLight(400, 400, 400);
+    this.initPointLight(400, 400, -400);
+    this.initPointLight(-400, 400, -400);
+    this.initPointLight(-400, 400, 400);
   }
 
   //方向光
@@ -209,11 +240,17 @@ export default class ModelLoader {
   }
 
   initSize(w, h) {
-    const frame = getFrame(this.frameId);
-    const width = frame.clientWidth || w;
-    const height = frame.clientHeight || h;
+    let width, height;
+    if (w && h) {
+      width = w;
+      height = h;
+    } else {
+      const frame = getFrame(this.frameId);
+      width = frame.clientWidth;
+      height = frame.clientHeight;
+    }
     this.size = {width, height};
-    return this.size;
+    return {width, height};
   }
 
   /* 创建相机 */

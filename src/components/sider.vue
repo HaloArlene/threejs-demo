@@ -1,5 +1,5 @@
 <template>
-  <a-layout-sider collapsible v-model="collapsed">
+  <a-layout-sider class="main-sider" collapsible v-model="collapsed">
     <div class="logo"></div>
     <a-menu theme="dark" :defaultSelectedKeys="['sub0']" :selectedKeys="selectedKeys"
             :defaultOpenKeys="['sub1']" mode="inline" @click="clickItem">
@@ -52,7 +52,9 @@
             key: 'sub2', icon: 'tags', title: 'Demos', children: [
               {path: '/i18nDemo', title: 'Vue-I18n Demo'},
               {path: '/vuexDemo', title: 'Vuex Demo'},
-              {path: '/dailyChallenges', title: 'Daily Challenges'}
+              {path: '/comments', title: 'Comments Demo'},
+              {path: '/dailyChallenges', title: 'Daily Challenges'},
+              {path: '/editableDiv', title: 'Editable Div'}
             ]
           },
         ]

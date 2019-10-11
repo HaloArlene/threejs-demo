@@ -68,6 +68,14 @@ export default new Router({
     {
       path: '/volution',
       component: () => import('@/pages/three/volution')
+    },
+    {
+      path: '/comments',
+      component: () => import('@/pages/demos/comments')
+    },
+    {
+      path: '/editableDiv',
+      component: () => import('@/pages/demos/editableDiv')
     }
   ]
 })

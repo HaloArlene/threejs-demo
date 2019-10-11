@@ -1,0 +1,30 @@
+{
+  "id": "1453143",
+  "name": "myicons",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "6116393",
+      "name": "消息",
+      "font_class": "xiaoxi",
+      "unicode": "e6c4",
+      "unicode_decimal": 59076
+    },
+    {
+      "icon_id": "8348273",
+      "name": "删 除",
+      "font_class": "shanchu-copy-copy",
+      "unicode": "e615",
+      "unicode_decimal": 58901
+    },
+    {
+      "icon_id": "9903700",
+      "name": "表情",
+      "font_class": "biaoqing2",
+      "unicode": "e60f",
+      "unicode_decimal": 58895
+    }
+  ]
+}

@@ -8,7 +8,7 @@ import store from './store'
 import Antd from 'ant-design-vue'
 console.log(Antd)
 import 'ant-design-vue/dist/antd.css'
-import './assets/styles/common.css'
+import './assets/icon/iconfont.css'
 
 Vue.config.productionTip = false;
 Vue.use(Antd);

@@ -1,40 +1,29 @@
 <template>
   <div id="app">
-    <a-layout id="components-layout-demo-side" style="min-height: 100vh">
+    <a-layout id="components-layout-demo-side">
       <sider/>
-      <a-layout>
-        <top-header/>
+      <a-layout class="main-layout">
+        <com-header/>
         <a-layout-content style="margin: 0 16px">
           <router-view/>
         </a-layout-content>
-        <layout-footer/>
+        <com-footer/>
       </a-layout>
     </a-layout>
   </div>
 </template>
 
 <script>
-    import topHeader from './components/top-header'
-    import sider from './components/sider'
-    import layoutFooter from './components/layout-footer'
+  import ComHeader from './components/com-header'
+  import sider from './components/sider'
+  import ComFooter from './components/com-footer'
 
-    export default {
-        name: 'App',
-        components: {sider, topHeader, layoutFooter},
-    }
+  export default {
+    name: 'App',
+    components: {sider, ComHeader, ComFooter},
+  }
 </script>
 
-<style>
-  #app {
-    font-family: 'Avenir', Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    color: #2c3e50;
-  }
-
-  #components-layout-demo-side .logo {
-    height: 32px;
-    background: rgba(255, 255, 255, .2);
-    margin: 16px;
-  }
+<style lang="less">
+  @import "./assets/styles/common";
 </style>
