@@ -12,6 +12,21 @@ export default {
       controls: null
     }
   },
+  beforeDestroy() {
+    if (this.mesh) {
+      this.mesh.geometry.dispose();
+      this.mesh.material.dispose();
+    }
+    this.camera && this.camera.dispose();
+    this.scene && this.scene.dispose();
+    if (this.renderer) {
+      this.renderer.dispose();
+      this.renderer.forceContextLoss();
+      this.renderer.context = null;
+      this.renderer.domElement = null;
+      this.renderer = null;
+    }
+  },
   methods: {
     getSize() {
       const frame = document.getElementById('canvas-frame');

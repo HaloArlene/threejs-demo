@@ -14,6 +14,7 @@
     "glslCanvas": "^0.1.7",
     "stats.js": "^0.17.0",
     "three": "^0.107.0",
+    "three-gcode-loader": "^1.0.7",
     "three-orbitcontrols": "^2.102.2",
     "three-stl-loader": "^1.0.6",
     "three.regular.helvetiker": "^1.0.0",
