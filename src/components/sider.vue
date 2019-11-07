@@ -54,7 +54,8 @@
               {path: '/vuexDemo', title: 'Vuex Demo'},
               {path: '/comments', title: 'Comments Demo'},
               {path: '/dailyChallenges', title: 'Daily Challenges'},
-              {path: '/editableDiv', title: 'Editable Div'}
+              {path: '/editableDiv', title: 'Editable Div'},
+              {path: '/progress', title: 'Progress'},
             ]
           },
         ]
