@@ -19,11 +19,24 @@
         renderer: null,
         camera: null,
         scene: null,
-        mesh: null
+        mesh: null,
+        animationId: null
       }
     },
     mounted() {
       this.startThree();
+    },
+    beforeDestroy() {
+      this.animationId && cancelAnimationFrame(this.animationId);
+      if (this.mesh) {
+        this.mesh.geometry.dispose();
+        this.mesh.material.dispose();
+      }
+      this.scene && this.scene.dispose();
+      this.renderer.dispose();
+      this.renderer.forceContextLoss();
+      this.renderer.domElement = null;
+      this.renderer = null;
     },
     methods: {
       startThree() {
@@ -82,8 +95,8 @@
         if (this.mesh.position.x > -400) {
           this.mesh.position.x -= 1;
         }
-        this.renderer.render(this.scene, this.camera);
-        requestAnimationFrame(this.animation);
+        this.renderer && this.renderer.render(this.scene, this.camera);
+        this.animationId = requestAnimationFrame(this.animation);
       }
     }
   }

@@ -15,39 +15,52 @@
   export default {
     components: {Breadcrumb},
     mixins: [threeMixin],
+    data() {
+      return {
+        objects: []
+      }
+    },
     mounted() {
       this.initThree();
     },
+    beforeDestroy() {
+      if (this.objects.length) {
+        this.objects.forEach(obj => {
+          obj.geometry.dispose();
+          obj.material.dispose();
+        });
+      }
+    },
     methods: {
       initThree() {
-        const renderer = this.createRenderer();
-        const camera = this.createCamera(45, 1, 1500);
-        const scene = this.createScene();
+        this.renderer = this.createRenderer();
+        this.camera = this.createCamera(45, 1, 1500);
+        this.scene = this.createScene();
 
-        camera.position.set(600, 0, 600);
-        camera.up.set(0, 1, 0);
-        camera.lookAt(0, 0, 0);
+        this.camera.position.set(600, 0, 600);
+        this.camera.up.set(0, 1, 0);
+        this.camera.lookAt(0, 0, 0);
 
         const light = new THREE.DirectionalLight(0xFF0000, 1);
         light.position.set(1, 0, 4);
-        scene.add(light);
+        this.scene.add(light);
 
         const light1 = new THREE.PointLight(0xFF0000);
         light.position.set(0, 40, 50);
-        scene.add(light1);
+        this.scene.add(light1);
 
-        scene.add(this.createObject(0, 0, 0));
-        scene.add(this.createObject(-300, 0, 0));
-        scene.add(this.createObject(0, -150, 0));
-        scene.add(this.createObject(0, 150, 0));
-        scene.add(this.createObject(300, 0, 0));
-        scene.add(this.createObject(0, 0, 100));
+        this.objects = [
+          this.createObject(0, 0, 0), this.createObject(-300, 0, 0), this.createObject(0, -150, 0),
+          this.createObject(0, 150, 0), this.createObject(300, 0, 0), this.createObject(0, 0, 100)
+        ];
 
-        const controls = this.createControls(camera, renderer);
+        this.objects.forEach(obj => this.scene.add(obj));
+
+        this.controls = this.createControls(this.camera, this.renderer);
         const animate = () => {
-          requestAnimationFrame(animate);
-          controls.update();
-          renderer.render(scene, camera);
+          this.animationId = requestAnimationFrame(animate);
+          this.controls.update();
+          this.renderer.render(this.scene, this.camera);
         };
         animate();
       },

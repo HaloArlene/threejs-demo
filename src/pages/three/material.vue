@@ -65,7 +65,7 @@
         this.controls = this.createControls(this.camera, this.renderer);
 
         const animate = () => {
-          requestAnimationFrame(animate);
+          this.animationId = requestAnimationFrame(animate);
           this.controls.update();
           this.renderer.render(this.scene, this.camera);
         };

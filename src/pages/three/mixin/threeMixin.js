@@ -9,8 +9,25 @@ export default {
       geometry: null,
       material: null,
       mesh: null,
-      controls: null
+      controls: null,
+      animationId: null
     }
+  },
+  beforeDestroy() {
+    this.animationId && cancelAnimationFrame(this.animationId);
+    if (this.mesh) {
+      this.mesh.geometry.dispose();
+      this.mesh.material.dispose();
+    }
+    this.scene && this.scene.dispose();
+    this.controls && this.controls.dispose();
+    if (this.renderer) {
+      this.renderer.dispose();
+      this.renderer.forceContextLoss();
+      this.renderer.domElement = null;
+      this.renderer = null;
+    }
+    this.camera = null;
   },
   methods: {
     getSize() {

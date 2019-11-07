@@ -17,16 +17,16 @@
     mixins: [threeMixin],
     components: {Breadcrumb},
     mounted() {
-      const renderer = this.createRenderer();
-      const scene = this.createScene();
-      const camera = this.createCamera(45, 0.1, 50);
-      camera.position.set(5, 15, 25);
-      camera.lookAt(0, 0, 0);
-      scene.add(camera);
+      this.renderer = this.createRenderer();
+      this.scene = this.createScene();
+      this.camera = this.createCamera(45, 0.1, 50);
+      this.camera.position.set(5, 15, 25);
+      this.camera.lookAt(0, 0, 0);
+      this.scene.add(this.camera);
 
       const light = new THREE.DirectionalLight();
       light.position.set(3, 2, 5);
-      scene.add(light);
+      this.scene.add(light);
 
       const geometry = new THREE.BoxBufferGeometry(6, 6, 6);
 
@@ -71,18 +71,17 @@
         },
       });
       material.extensions.derivatives = true;
-      const cube = new THREE.Mesh(geometry, material);
-      scene.add(cube);
+      this.mesh = new THREE.Mesh(geometry, material);
+      this.scene.add(this.mesh);
 
       const draw = () => {
-        cube.rotation.y += 0.01;
-        if (cube.rotation.y > Math.PI * 2) {
-          cube.rotation.y -= Math.PI * 2;
+        this.mesh.rotation.y += 0.01;
+        if (this.mesh.rotation.y > Math.PI * 2) {
+          this.mesh.rotation.y -= Math.PI * 2;
         }
-        renderer.render(scene, camera);
-        requestAnimationFrame(draw);
+        this.renderer.render(this.scene, this.camera);
+        this.animationId = requestAnimationFrame(draw);
       };
-
       draw();
     }
   }
