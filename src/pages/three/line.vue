@@ -15,10 +15,33 @@
     name: "modelRender",
     components: {Breadcrumb},
     data() {
-      return {}
+      return {
+        camera: null,
+        scene: null,
+        renderer: null,
+        cube: null,
+        line: null,
+        animationId: null,
+      }
     },
     mounted() {
       this.initThree();
+    },
+    beforeDestroy() {
+      this.animationId && cancelAnimationFrame(this.animationId);
+      if (this.line) {
+        this.line.geometry.dispose();
+        this.line.material.dispose();
+      }
+      if (this.cube) {
+        this.cube.geometry.dispose();
+        this.cube.material.dispose();
+      }
+      this.scene && this.scene.dispose();
+      this.renderer.dispose();
+      this.renderer.forceContextLoss();
+      this.renderer.domElement = null;
+      this.renderer = null;
     },
     methods: {
       initThree() {
@@ -26,33 +49,32 @@
         const width = frame.clientWidth;
         const height = frame.clientHeight;
 
-        const camera = new THREE.PerspectiveCamera(45, width / height, 1, 500);
-        camera.position.set(0, 0, 50);
-        camera.lookAt(0, 0, 0);
+        this.camera = new THREE.PerspectiveCamera(45, width / height, 1, 500);
+        this.camera.position.set(0, 0, 50);
+        this.camera.lookAt(0, 0, 0);
 
-        const renderer = new THREE.WebGLRenderer();
-        renderer.setSize(width, height);
-        frame.appendChild(renderer.domElement);
+        this.renderer = new THREE.WebGLRenderer();
+        this.renderer.setSize(width, height);
+        frame.appendChild(this.renderer.domElement);
 
-        const scene = new THREE.Scene();
+        this.scene = new THREE.Scene();
         const geometry = new THREE.BoxGeometry(1, 1, 1);
         const material = new THREE.MeshBasicMaterial({color: 0x00ff00});
-        const cube = new THREE.Mesh(geometry, material);
-        scene.add(cube);
+        this.cube = new THREE.Mesh(geometry, material);
+        this.scene.add(this.cube);
 
         const lineMaterial = new THREE.LineBasicMaterial({color: 0x0000ff});
         const geometry2 = new THREE.Geometry();
         geometry2.vertices.push(new THREE.Vector3(-10, 0, 0), new THREE.Vector3(0, 10, 0), new THREE.Vector3(10, 0, 0));
-        const line = new THREE.Line(geometry2, lineMaterial);
-        scene.add(line);
+        this.line = new THREE.Line(geometry2, lineMaterial);
+        this.scene.add(this.line);
 
         const animate = () => {
-          requestAnimationFrame(animate);
-          cube.rotation.x += 0.01;
-          cube.rotation.y += 0.01;
-          renderer.render(scene, camera);
+          this.animationId = requestAnimationFrame(animate);
+          this.cube.rotation.x += 0.01;
+          this.cube.rotation.y += 0.01;
+          this.renderer.render(this.scene, this.camera);
         };
-
         animate();
       }
     }

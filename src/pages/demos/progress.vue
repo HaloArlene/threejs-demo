@@ -4,6 +4,9 @@
 
     <div class="main-page">
       <wave-progress :type="'circle'"></wave-progress>
+      <wave-progress :type="'star'"></wave-progress>
+      <wave-progress :type="'roundRect'"></wave-progress>
+      <wave-progress :type="'heart'"></wave-progress>
     </div>
   </div>
 </template>
@@ -18,5 +21,6 @@
 </script>
 
 <style scoped>
-
+  .demo-page-progress .main-page {
+  }
 </style>

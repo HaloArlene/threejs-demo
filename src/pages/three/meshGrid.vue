@@ -15,19 +15,33 @@
     name: "meshGrid",
     components: {Breadcrumb},
     data() {
-      return {};
+      return {
+        renderer: null,
+        scene: null,
+        camera: null,
+      };
     },
     mounted() {
       this.startThree();
     },
+    beforeDestroy() {
+      this.scene && this.scene.dispose();
+      if (this.renderer) {
+        this.renderer.dispose();
+        this.renderer.forceContextLoss();
+        this.renderer.domElement = null;
+        this.renderer = null;
+      }
+    },
     methods: {
       startThree() {
-        const renderer = this.createRenderer();
-        const scene = this.createScene();
-        scene.add(this.createLight());
-        this.createLines(scene);
-        renderer.clear();
-        renderer.render(scene, this.createCamera())
+        this.renderer = this.createRenderer();
+        this.scene = this.createScene();
+        this.scene.add(this.createLight());
+        this.camera = this.createCamera();
+        this.createLines(this.scene);
+        this.renderer.clear();
+        this.renderer.render(this.scene, this.camera);
       },
       getSize() {
         const frame = document.getElementById('canvas-frame');

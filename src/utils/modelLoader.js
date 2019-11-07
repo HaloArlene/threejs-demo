@@ -160,7 +160,6 @@ export default class ModelLoader {
     this.controls && this.controls.dispose();
     this.renderer.dispose();
     this.renderer.forceContextLoss();
-    this.renderer.context = null;
     this.renderer.domElement = null;
     this.renderer = null;
     console.log('[model cleaned]');

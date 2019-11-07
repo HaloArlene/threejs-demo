@@ -24,28 +24,28 @@
         const radius = 0.5, maxHeight = 5;
         let id = null, isMoving = true, v = 0, a = -0.01;
 
-        const stats = new Stats();
-        stats.dom.style.position = 'absolute';
-        stats.dom.style.right = '0px';
-        stats.dom.style.left = 'auto';
-        document.getElementById('canvas-frame').appendChild(stats.dom);
+        this.stats = new Stats();
+        this.stats.dom.style.position = 'absolute';
+        this.stats.dom.style.right = '0px';
+        this.stats.dom.style.left = 'auto';
+        document.getElementById('canvas-frame').appendChild(this.stats.dom);
 
-        const camera = new THREE.OrthographicCamera(-5, 5, 3.75, -3.75, 0.1, 100);
-        camera.position.set(5, 10, 20);
-        camera.lookAt(new THREE.Vector3(0, 3, 0));
+        this.camera = new THREE.OrthographicCamera(-5, 5, 3.75, -3.75, 0.1, 100);
+        this.camera.position.set(5, 10, 20);
+        this.camera.lookAt(new THREE.Vector3(0, 3, 0));
 
         const geometry = new THREE.SphereGeometry(radius, 16, 12);
         const material = new THREE.MeshBasicMaterial({color: '0xff0000'});
-        const ballMesh = new THREE.Mesh(geometry, material);
-        ballMesh.position.y = radius;
-        const scene = new THREE.Scene();
-        scene.add(ballMesh);
+        this.mesh = new THREE.Mesh(geometry, material);
+        this.mesh.position.y = radius;
+        this.scene = new THREE.Scene();
+        this.scene.add(this.mesh);
 
         const light = new THREE.DirectionalLight(0xffffff);
         light.position.set(10, 10, 15);
-        scene.add(light);
+        this.scene.add(light);
 
-        const renderer = this.createRenderer(0x000000);
+        this.renderer = this.createRenderer(0x000000);
 
         const textureLoader = new THREE.TextureLoader();
         textureLoader.load('../../../static/img/chess_board.png', texture => {
@@ -53,37 +53,33 @@
           texture.repeat.set(4, 4);
           const plane = new THREE.Mesh(new THREE.PlaneGeometry(5, 5), new THREE.MeshLambertMaterial({map: texture}));
           plane.rotation.x = -Math.PI / 2;
-          scene.add(plane);
+          this.scene.add(plane);
 
-          renderer.render(scene, camera);
+          this.renderer.render(this.scene, this.camera);
           id = requestAnimationFrame(draw);
         });
 
         const draw = () => {
-          stats.begin();
+          this.stats.begin();
           if (isMoving) {
 
-            ballMesh.position.y += v;
+            this.mesh.position.y += v;
             v += a;
 
-            if (ballMesh.position.y < radius) {
+            if (this.mesh.position.y < radius) {
               v = -v * 0.9;
             }
             if (Math.abs(v) < 0.0001) {
               isMoving = false;
-              ballMesh.position.y = radius;
-              cancelAnimationFrame(id);
+              this.mesh.position.y = radius;
+              cancelAnimationFrame(this.cycleId);
             }
           }
-          renderer.render(scene, camera);
-          id = requestAnimationFrame(draw);
-          stats.end();
+          this.renderer.render(this.scene, this.camera);
+          this.animationId = requestAnimationFrame(draw);
+          this.stats.end();
         };
       }
     }
   }
 </script>
-
-<style scoped>
-
-</style>

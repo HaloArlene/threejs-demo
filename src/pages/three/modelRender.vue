@@ -14,8 +14,13 @@
 
   export default {
     components: {Breadcrumb},
+    data() {
+      return {
+        modelLoader: null
+      }
+    },
     mounted() {
-      const modelLoader = new ModelLoader({elId: 'canvas-frame', fileType: 'gcode'});
+      this.modelLoader = new ModelLoader({elId: 'canvas-frame', fileType: 'gcode'});
 
       // modelLoader.loader.load('../../../static/stl/齐天大圣.stl', geometry => {
       //   modelLoader.renderMesh(geometry);
@@ -23,7 +28,7 @@
       const geometry = new THREE.BufferGeometry();
       const points = [];
 
-      modelLoader.loader.load('../../../static/gcode/test.gcode', data => {
+      this.modelLoader.loader.load('../../../static/gcode/test.gcode', data => {
         const layers = data[0];
         const layerIndices = data[1];
         console.log('-layers-', layers);
@@ -46,7 +51,7 @@
         }
         console.log('-points-', points);
         geometry.setFromPoints(points);
-        modelLoader.renderMesh(geometry, null, new THREE.MeshPhysicalMaterial({
+        this.modelLoader.renderMesh(geometry, null, new THREE.MeshPhysicalMaterial({
           color: 0x6d0c74,  //物体颜色
           metalness: 0.7,
           roughness: 0.7,
@@ -55,5 +60,8 @@
         }));
       });
     },
+    beforeDestroy() {
+      this.modelLoader && this.modelLoader.cleanAll();
+    }
   }
 </script>

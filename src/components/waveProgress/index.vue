@@ -50,6 +50,9 @@
       this.drawCanvas = this.draw.bind(this);
       this.draw();
     },
+    beforeDestroy() {
+      cancelAnimationFrame(this.drawCanvas);
+    },
     methods: {
       draw() {
         const ctx = this.canvas.getContext('2d');

@@ -16,44 +16,60 @@
     name: "cubeDemo",
     components: {Breadcrumb},
     mixins: [ThreeMixin],
+    data() {
+      return {
+        stats: null,
+        cubes: [],
+        animationId: null
+      }
+    },
+    beforeDestroy() {
+      if (this.cubes.length) {
+        this.cubes.forEach(cube => {
+          cube.geometry.dispose();
+          cube.material.dispose();
+        });
+      }
+      this.stats = null;
+    },
     mounted() {
-      const renderer = this.createRenderer();
-      const scene = this.createScene();
-      const camera = this.createCamera(75, 0.1, 5);
-      camera.position.z = 3;
+      this.renderer = this.createRenderer();
+      this.scene = this.createScene();
+      this.camera = this.createCamera(75, 0.1, 5);
+      this.camera.position.z = 3;
 
       const light = new THREE.DirectionalLight(0xFFFFFF, 1);
       light.position.set(-1, 2, 4);
-      scene.add(light);
+      this.scene.add(light);
 
       const geometry = new THREE.BoxGeometry(1, 1, 1);
-      const cubes = [
+      this.cubes = [
         this.createCube(geometry, 0xFF99E5, 0),
         this.createCube(geometry, 0x44aa88, 2),
         this.createCube(geometry, 0x8844aa, -2)
       ];
-      cubes.forEach(cube => {
-        scene.add(cube);
+      this.cubes.forEach(cube => {
+        this.scene.add(cube);
       });
 
       const Stats = require('stats.js');
-      const stats = new Stats();
-      stats.showPanel(1);
-      stats.dom.style.position = 'absolute';
-      document.getElementById('canvas-frame').appendChild(stats.dom);
+      this.stats = new Stats();
+      this.stats.showPanel(1);
+      this.stats.dom.style.position = 'absolute';
+      document.getElementById('canvas-frame').appendChild(this.stats.dom);
 
       const animation = time => {
-        stats.begin();
+        this.stats.begin();
         time *= 0.001;
-        cubes.forEach((cube, index) => {
+        this.cubes.forEach((cube, index) => {
           const speed = 1 + index * .1;
           const rot = speed * time;
           cube.rotation.x = rot;
           cube.rotation.y = rot;
         });
-        renderer.render(scene, camera);
-        stats.end();
-        requestAnimationFrame(animation);
+        this.renderer.render(this.scene, this.camera);
+        this.stats.end();
+        this.animationId = requestAnimationFrame(animation);
       };
       animation();
     },
