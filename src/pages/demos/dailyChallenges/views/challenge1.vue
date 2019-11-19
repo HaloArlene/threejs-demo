@@ -1,12 +1,16 @@
 <template>
-  <div class="view-challenge-1">
-    <com-button :text="'Button'" @onClick="comBtnClick"></com-button>
+  <div class="view-challenge view-challenge-1">
+    <com-button :text="'Button'"></com-button>
+
     <div class="loader-box">
       <div class="loader">
         <span></span><span></span><span></span>
       </div>
     </div>
 
+    <div>
+
+    </div>
   </div>
 </template>
 
@@ -15,15 +19,10 @@
 
   export default {
     components: {ComButton},
-    methods: {
-      comBtnClick() {
-
-      }
-    }
   }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
   .view-challenge-1 {
     .loader-box {
       display: inline-block;

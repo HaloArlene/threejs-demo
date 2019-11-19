@@ -22,26 +22,29 @@
 <script>
   import Breadcrumb from "../../../components/breadcrumb";
   import ComButton from "../../../components/com-button";
-  import Challenge1 from "./views/challenge1";
+  import Challenges from './views';
 
   export default {
-    components: {Breadcrumb, ComButton, Challenge1},
+    components: {Breadcrumb, ComButton, ...Challenges},
     data() {
+      const challengeCount = 6; //challenge个数
+      let challenges = [], views = [];
+      for (let i = 0; i < challengeCount; i++) {
+        challenges.push(`Challenge ${i + 1}`);
+        views.push(`Challenge${i + 1}`);
+      }
       return {
         selectedKeys: [0],
-        challenges: ['Challenge 1'],
+        challenges,
+        views,
         activeView: 'Challenge1',
       }
     },
     methods: {
       clickItem({item, key, keyPath}) {
         this.selectedKeys = [key];
+        this.activeView = this.views[key];
       },
     }
   }
 </script>
-
-<style scoped>
-
-
-</style>

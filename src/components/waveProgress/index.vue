@@ -171,7 +171,7 @@
 </script>
 
 <style lang="less" scoped>
-  @import "../../assets/styles/variables";
-
-
+  .comp-wave-progress {
+    display: inline-block;
+  }
 </style>
