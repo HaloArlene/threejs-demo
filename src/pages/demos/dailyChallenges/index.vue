@@ -27,7 +27,7 @@
   export default {
     components: {Breadcrumb, ComButton, ...Challenges},
     data() {
-      const challengeCount = 6; //challenge个数
+      const challengeCount = 15; //challenge个数
       let challenges = [], views = [];
       for (let i = 0; i < challengeCount; i++) {
         challenges.push(`Challenge ${i + 1}`);
