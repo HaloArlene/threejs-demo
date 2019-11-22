@@ -45,10 +45,10 @@
         },
         {
           key: 'demos', path: '/demos', icon: 'tags', title: 'Demos', children: [
+            {path: '/dailyChallenges', title: 'Daily Challenges', key: 'dailyChallenges'},
             {path: '/i18nDemo', title: 'Vue-I18n Demo', key: 'i18nDemo'},
             {path: '/vuexDemo', title: 'Vuex Demo', key: 'vuexDemo'},
             {path: '/comments', title: 'Comments Demo', key: 'comments'},
-            {path: '/dailyChallenges', title: 'Daily Challenges', key: 'dailyChallenges'},
             {path: '/editableDiv', title: 'Editable Div', key: 'editableDiv'},
             {path: '/progress', title: 'Progress', key: 'progress'},
           ]
@@ -60,7 +60,8 @@
           const {path, key} = menu;
           return [{path, key}];
         } else {
-          return menu.children.map(item => ({path: item.path, key: item.key}));
+          const parentKey = menu.key;
+          return menu.children.map(item => ({path: item.path, key: item.key, parentKey}));
         }
       }).reduce((a1, a2) => a1.concat(a2));
       return {
@@ -76,6 +77,7 @@
       '$route.path': function (val, oldVal) {
         const item = this.keyMap.find(k => k.path === val);
         this.selectedKeys = [item.key];
+        if (item.parentKey) this.openKeys = [item.parentKey];
       }
     },
     methods: {

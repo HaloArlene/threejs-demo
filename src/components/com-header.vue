@@ -1,6 +1,6 @@
 <template>
   <a-layout-header class="main-header">
-    <h2>Welcome to my Vue.js demo app.</h2>
+    <h2>Welcome to my demo app.</h2>
   </a-layout-header>
 </template>
 
