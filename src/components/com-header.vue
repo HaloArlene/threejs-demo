@@ -1,6 +1,6 @@
 <template>
   <a-layout-header class="main-header">
-    <h2>Welcome to my demo app.</h2>
+    <h2>Welcome! There are some interesting things!</h2>
   </a-layout-header>
 </template>
 
@@ -13,6 +13,17 @@
     h2 {
       text-align: center;
       color: #ffffff;
+      background-image: linear-gradient(to right, orangered, orange, gold, lightgreen, cyan, dodgerblue, mediumpurple, hotpink, orangered);
+      animation: animate_text 60s linear infinite alternate;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: bold;
+    }
+  }
+
+  @keyframes animate_text {
+    to {
+      background-position: 2000vw;
     }
   }
 </style>
