@@ -9,7 +9,7 @@
     props: ['text'],
     data() {
       return {
-        chars: this.text.toUpperCase().split('')
+        chars: this.text.split('')
       }
     },
     methods: {
@@ -32,14 +32,14 @@
     font-family: sans-serif;
     overflow: hidden;
     text-align: center;
-    background-color: @base_blue;
+    background-color: deeppink;
     cursor: pointer;
     outline: none;
     transition: 0.5s;
 
     span {
       display: inline-block;
-      color: cornflowerblue;
+      color: white;
       font-size: 16px;
       transition: 0.5s;
 
@@ -77,7 +77,7 @@
         transform: translateY(0);
       }
 
-      background-color: aqua;
+      background-color: chocolate;
     }
   }
 </style>

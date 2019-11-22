@@ -13,6 +13,11 @@ import Challenge12 from './challenge12';
 import Challenge13 from './challenge13';
 import Challenge14 from './challenge14';
 import Challenge15 from './challenge15';
+import Challenge16 from './challenge16';
+import Challenge17 from './challenge17';
+import Challenge18 from './challenge18';
+import Challenge19 from './challenge19';
+import Challenge20 from './challenge20';
 
 export default {
   Challenge1,
@@ -30,4 +35,9 @@ export default {
   Challenge13,
   Challenge14,
   Challenge15,
+  Challenge16,
+  Challenge17,
+  Challenge18,
+  Challenge19,
+  Challenge20,
 }
