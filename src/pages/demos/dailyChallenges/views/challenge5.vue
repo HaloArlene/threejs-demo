@@ -1,17 +1,13 @@
 <template>
   <div class="view-challenge">
     <div class="diamond">
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
+      <span/>
+      <span/>
+      <span/>
+      <span/>
     </div>
   </div>
 </template>
-
-<script>
-  export default {}
-</script>
 
 <style lang="less" scoped>
   @color1: deepskyblue;
@@ -42,7 +38,7 @@
       }
     }
   }
-  
+
   @keyframes animate {
     0% {
       border-color: @color1 @color2 @color3 @color4;

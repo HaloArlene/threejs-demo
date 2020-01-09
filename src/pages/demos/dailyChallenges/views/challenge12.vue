@@ -26,10 +26,6 @@
   </div>
 </template>
 
-<script>
-  export default {}
-</script>
-
 <style lang="less" scoped>
   .view-challenge {
     background: linear-gradient(dimgray, silver, silver, dimgray);

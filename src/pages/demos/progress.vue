@@ -3,10 +3,10 @@
     <breadcrumb :crumbs="['Demos', 'Wave Progress']"/>
 
     <div class="main-page">
-      <wave-progress :type="'circle'"></wave-progress>
-      <wave-progress :type="'star'"></wave-progress>
-      <wave-progress :type="'roundRect'"></wave-progress>
-      <wave-progress :type="'heart'"></wave-progress>
+      <wave-progress :type="'circle'"/>
+      <wave-progress :type="'star'"/>
+      <wave-progress :type="'roundRect'"/>
+      <wave-progress :type="'heart'"/>
     </div>
   </div>
 </template>

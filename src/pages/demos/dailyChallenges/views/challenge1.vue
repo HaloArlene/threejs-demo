@@ -1,10 +1,10 @@
 <template>
   <div class="view-challenge view-challenge-1">
-    <com-button :text="'Button'"></com-button>
+    <com-button :text="'Button'"/>
 
     <div class="loader-box">
       <div class="loader">
-        <span></span><span></span><span></span>
+        <span/><span/><span/>
       </div>
     </div>
 

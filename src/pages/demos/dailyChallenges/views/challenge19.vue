@@ -2,17 +2,13 @@
   <div class="view-challenge">
     <p class="rainbow">
       web
-      <span data-text="web"></span>
-      <span data-text="web"></span>
-      <span data-text="web"></span>
-      <span data-text="web"></span>
+      <span data-text="web"/>
+      <span data-text="web"/>
+      <span data-text="web"/>
+      <span data-text="web"/>
     </p>
   </div>
 </template>
-
-<script>
-  export default {}
-</script>
 
 <style lang="less" scoped>
   .view-challenge {
