@@ -5,7 +5,6 @@
     </a-breadcrumb>
     <div class="main-page home-page">
       <diagonal-box class="intro-box" :title="title" :content="introduce"/>
-
       <com-button class="start-btn" :text="startTxt" @onClick="$router.push('/dailyChallenges')"/>
     </div>
   </div>
