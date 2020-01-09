@@ -1,6 +1,6 @@
 const THREE = require('three');
 const STLLoader = require('three-stl-loader')(THREE);
-import GCodeLoader from 'three-gcode-loader';
+
 const OrbitControls = require('three-orbitcontrols');
 
 //模型渲染基本配置
@@ -13,7 +13,7 @@ const getBasicModelLoaderConfig = () => ({
   defaultCameraOption: {  //照相机默认配置
     fov: 45,
     near: 0.1,
-    far: 2000
+    far: 5000
   },
   axesSize: 800,  //坐标轴尺寸
   gridOption: { //网格
@@ -51,7 +51,6 @@ export default class ModelLoader {
                 machineBox = false, //是否显示机器包围盒
                 machineSize = null, //机器框尺寸
                 grid = true,  //是否添加网格
-                fileType = 'stl', //文件类型
                 width,  //画布宽度
                 height, //画布高度
               }) {
@@ -64,7 +63,6 @@ export default class ModelLoader {
     this.needMachineBox = machineBox;
     this.needGrid = grid;
     this.machineSize = machineSize;
-    this.fileType = fileType;
 
     //若按机器边框渲染，重置参数
     if (this.needMachineBox) {
@@ -80,13 +78,7 @@ export default class ModelLoader {
         side: THREE.DoubleSide,
       });
     }
-
-    if (this.fileType.toLowerCase() === 'gcode') {
-      this.loader = new GCodeLoader();
-    } else {
-      this.loader = new STLLoader();
-    }
-
+    this.loader = new STLLoader();
     //初始化场景
     this.size = this.initSize(width, height);
     this.scene = new THREE.Scene();
@@ -160,9 +152,9 @@ export default class ModelLoader {
     this.controls && this.controls.dispose();
     this.renderer.dispose();
     this.renderer.forceContextLoss();
+    this.renderer.context = null;
     this.renderer.domElement = null;
     this.renderer = null;
-    console.log('[model cleaned]');
   }
 
   renderFromFile(file, onFinish) {  //从模型文件创建
@@ -179,19 +171,28 @@ export default class ModelLoader {
     }
   }
 
+  renderFromUrl(url, onProgress, onFinish, onerror) {  //从http请求url创建
+    this.loader.load(url, geometry => {
+      this.renderMesh(geometry, onFinish);
+    }, onProgress, onerror)
+  }
+
   //解析模型文件
   onFileLoaded(callback) {
     this.reader.addEventListener('load', event => {
       const contents = event.target.result;
       const geometry = this.loader.parse(contents);
-      geometry.sourceType = this.fileType.toLowerCase() === 'gcode' ? 'gcode' : 'stl';
+      geometry.sourceType = 'stl';
       callback(geometry);
     }, false);
   }
 
   //渲染网格模型
   renderMesh(geometry, onFinish, material = config.defaultMaterial) {
-    geometry.computeVertexNormals();
+    geometry.computeVertexNormals();  //模型顶点平滑化
+    geometry.computeBoundingBox();  //计算模型包围盒
+    geometry.center();  //模型居中
+
     this.mesh = new THREE.Mesh(geometry, material);
 
     //是否添加包围盒
@@ -335,65 +336,47 @@ export default class ModelLoader {
     return renderer;
   }
 
-  toCenter(mesh) {  //模型移到原点
-    const box = new THREE.Box3().setFromObject(mesh);
-    const cx = (box.min.x + box.max.x) / 2, cy = (box.min.y + box.max.y) / 2, cz = (box.min.z + box.max.z) / 2;
-    mesh.position.x -= cx;
-    mesh.position.y -= cy;
-    mesh.position.z -= cz;
-  }
-
-  translateObjectZ(mesh) {  //z轴方向平移模型
-    const box = new THREE.Box3().setFromObject(mesh);
-    const machineMinZ = -this.machineSize.z / 2;
-    const boxCenterZ = (box.max.z + box.min.z) / 2;
-    const boxH = box.max.z - box.min.z;
-    mesh.position.z -= boxCenterZ - machineMinZ;
-    mesh.position.z += boxH / 2;
-    return mesh;
-  }
+  /**********************************************************************************************/
 
   //创建机器边框
   createMachineBox(x, y, z) {
     this.machineSize = {x, y, z};
+    this.originGeometry = this.mesh.geometry.clone();
     const machineGeometry = new THREE.BoxGeometry(x, y, z);
     if (this.machineBox) {
       this.machineBox.geometry.dispose();
       this.machineBox.geometry = machineGeometry;
-      this.objectScaleOriginSize();
-      this.rotateObjToOrigin();
+      this.resetObject();
     } else {
       this.machineBox = new THREE.Mesh(machineGeometry, new THREE.MeshNormalMaterial({
         transparent: true, opacity: 0.2, side: THREE.DoubleSide
       }));
       this.machineBox.position.set(0, 0, 0);
       this.scene.add(this.machineBox);
-      this.originMatrix = this.mesh.matrix;
     }
     this.setModelSize();
-    this.setScaleLimit();
-    const mBox = new THREE.Box3().setFromObject(this.machineBox);
-    const yLen = mBox.max.y - mBox.min.y;
-    const asp = 2.3333;
-    this.camera.position.set(0, -yLen * asp, 0);
-    this.toCenter(this.mesh);
-    this.translateObjectZ(this.mesh);
+    this.setAxesScaleLimits();
+    this.resetMachineBoxView();
   }
 
-  setScaleLimit() { //计算缩放倍数范围
+  setAxesScaleLimits() {  //计算单轴缩放倍数范围
     if (!this.machineSize || !this.mesh) {
       return null;
     }
     const {x, y, z} = this.machineSize;
     const box = new THREE.Box3().setFromObject(this.mesh);
     const xSize = box.max.x - box.min.x, ySize = box.max.y - box.min.y, zSize = box.max.z - box.min.z;
-    const max = Math.floor(Math.min(x / xSize, y / ySize, z / zSize) * 100) / 100;
-    const min = Math.ceil(Math.max(1 / xSize, 1 / ySize, 1 / zSize) * 100) / 100;
-    this.scaleLimit = {max, min};
+    const getFloor = (l, s) => (Math.floor((l / s) * 100) / 100);
+    const getCeil = (l, s) => (Math.ceil((l / s) * 100) / 100);
+    this.axesScaleLimits = {
+      x: {max: getFloor(x, xSize), min: getCeil(1, xSize)},
+      y: {max: getFloor(y, ySize), min: getCeil(1, ySize)},
+      z: {max: getFloor(z, zSize), min: getCeil(1, zSize)}
+    }
   }
 
-  getScaleLimit() { //获取缩放倍数范围
-    return this.scaleLimit || null;
+  getAxesScaleLimits() {  //获取单轴缩放倍数范围
+    return this.axesScaleLimits || null;
   }
 
   setModelSize() {  //计算模型尺寸
@@ -408,62 +391,105 @@ export default class ModelLoader {
     return this.modelSize || null;
   }
 
-  scaleObject(scale) {  //缩放模型
-    this.toCenter(this.mesh);
-    this.mesh.scale.set(scale, scale, scale);
-    this.toCenter(this.mesh);
-    this.translateObjectZ(this.mesh);
+  resetObject() { //重置模型
+    this.mesh.geometry.dispose();
+    this.mesh.geometry = this.originGeometry.clone();
+    this.resetMachineBoxView();
+    this.setModelSize();
+    this.setAxesScaleLimits();
+  }
+
+  handleTransitionByMatrix(matrix) {  //执行变换
+    this.mesh.geometry.applyMatrix(matrix);
+    this.resetMachineBoxView();
     this.setModelSize();
   }
 
-  objectScaleOriginSize() { //还原初始尺寸
-    this.mesh.scale.set(1, 1, 1);
+  resetMachineBoxView() { //刷新机器边框位置及照相机位置
+    const mBox = new THREE.Box3().setFromObject(this.machineBox);
+    const box = new THREE.Box3().setFromObject(this.mesh);
+    const boxCenterZ = (box.max.z + box.min.z) / 2;
+    const boxH = box.max.z - box.min.z;
+    const dz = boxCenterZ - mBox.min.z - boxH / 2;
+    this.machineBox.position.z += dz;
+
+    const mBox2 = new THREE.Box3().setFromObject(this.machineBox);
+    const yLen = mBox2.max.y - mBox2.min.y;
+    const asp = 2.3333;
+    this.camera.position.set(0, -yLen * asp, (mBox2.max.z + mBox2.min.z) / 2);
   }
 
-  rotateObjX(angle) {
-    this.rotateObject(AXES.X, angle);
-  }
-
-  rotateObjY(angle) {
-    this.rotateObject(AXES.Y, angle);
-  }
-
-  rotateObjZ(angle) {
-    this.rotateObject(AXES.Z, angle);
+  rotateByMatrix(axis, radians) {  //应用旋转矩阵
+    let rotateMatrix = new THREE.Matrix4();
+    rotateMatrix.makeRotationAxis(axis.normalize(), radians);
+    this.handleTransitionByMatrix(rotateMatrix);
   }
 
   rotateObject(axes, angle) { //绕坐标轴旋转物体
-    this.toCenter(this.mesh);
+    const radian = THREE.Math.degToRad(angle);
     switch (axes) {
       case AXES.X:
-        this.rotateAroundWorldAxis(new THREE.Vector3(1, 0, 0), THREE.Math.degToRad(angle));
+        this.rotateByMatrix(new THREE.Vector3(1, 0, 0), radian);
         break;
       case AXES.Y:
-        this.rotateAroundWorldAxis(new THREE.Vector3(0, 1, 0), THREE.Math.degToRad(angle));
+        this.rotateByMatrix(new THREE.Vector3(0, 1, 0), radian);
         break;
       case AXES.Z:
-        this.rotateAroundWorldAxis(new THREE.Vector3(0, 0, 1), THREE.Math.degToRad(angle));
+        this.rotateByMatrix(new THREE.Vector3(0, 0, 1), radian);
         break;
       default:
         break;
     }
-    this.toCenter(this.mesh);
-    this.translateObjectZ(this.mesh);
-    this.setModelSize();
-    this.setScaleLimit();
+    this.setAxesScaleLimits();
   }
 
-  rotateAroundWorldAxis(axis, radians) {  //绕轴旋转物体
-    let rotWorldMatrix = new THREE.Matrix4();
-    rotWorldMatrix.makeRotationAxis(axis.normalize(), radians);
-    rotWorldMatrix.multiply(this.mesh.matrix);
-    this.mesh.matrix = rotWorldMatrix;
-    this.mesh.setRotationFromMatrix(this.mesh.matrix);
+  rotateObjX(angle) { //绕X轴旋转
+    this.rotateObject(AXES.X, angle);
   }
 
-  rotateObjToOrigin() { //恢复旋转初始状态
-    if (this.originMatrix) {
-      this.mesh.setRotationFromMatrix(this.originMatrix);
+  rotateObjY(angle) { //绕Y轴旋转
+    this.rotateObject(AXES.Y, angle);
+  }
+
+  rotateObjZ(angle) { //绕Z轴旋转
+    this.rotateObject(AXES.Z, angle);
+  }
+
+  scaleByMatrix(x, y, z) {  //应用缩放矩阵
+    let scaleMatrix = new THREE.Matrix4();
+    scaleMatrix.makeScale(x, y, z);
+    this.handleTransitionByMatrix(scaleMatrix);
+  }
+
+  scaleObject(scale) {  //缩放模型
+    this.scaleByMatrix(scale, scale, scale);
+  }
+
+  scaleAroundAxes(axes, scale) {  // 单轴缩放
+    switch (axes) {
+      case AXES.X:
+        this.scaleByMatrix(scale, 1, 1);
+        break;
+      case AXES.Y:
+        this.scaleByMatrix(1, scale, 1);
+        break;
+      case AXES.Z:
+        this.scaleByMatrix(1, 1, scale);
+        break;
+      default:
+        break;
     }
+  }
+
+  scaleObjX(scale) {  // x轴方向缩放
+    this.scaleAroundAxes(AXES.X, scale);
+  }
+
+  scaleObjY(scale) {  // y轴方向缩放
+    this.scaleAroundAxes(AXES.Y, scale);
+  }
+
+  scaleObjZ(scale) {  // z轴方向缩放
+    this.scaleAroundAxes(AXES.Z, scale);
   }
 }
