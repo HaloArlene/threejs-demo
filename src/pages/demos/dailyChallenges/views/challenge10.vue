@@ -2,22 +2,17 @@
   <div class="view-challenge">
     <div class="coffee">
       <div class="vapor">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
+        <span/>
+        <span/>
+        <span/>
+        <span/>
+        <span/>
       </div>
       <div class="cup"></div>
       <div class="plate"></div>
     </div>
   </div>
 </template>
-
-<script>
-  export default {
-  }
-</script>
 
 <style lang="less" scoped>
   .view-challenge {

@@ -2,99 +2,95 @@
   <div class="view-challenge">
     <div class="heart">
       <!-- line 1 -->
-      <span></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span></span>
+      <span/>
+      <span class="dot"/>
+      <span class="dot"/>
+      <span/>
+      <span/>
+      <span/>
+      <span class="dot"/>
+      <span class="dot"/>
+      <span/>
 
       <!-- line 2 -->
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
+      <span class="dot"/>
+      <span class="dot"/>
+      <span class="dot"/>
+      <span class="dot"/>
+      <span/>
+      <span class="dot"/>
+      <span class="dot"/>
+      <span class="dot"/>
+      <span class="dot"/>
 
       <!-- line 3 -->
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
+      <span class="dot"/>
+      <span class="dot"/>
+      <span class="dot"/>
+      <span class="dot"/>
+      <span class="dot"/>
+      <span class="dot"/>
+      <span class="dot"/>
+      <span class="dot"/>
+      <span class="dot"/>
 
       <!-- line 4 -->
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
+      <span class="dot"/>
+      <span class="dot"/>
+      <span class="dot"/>
+      <span class="dot"/>
+      <span class="dot"/>
+      <span class="dot"/>
+      <span class="dot"/>
+      <span class="dot"/>
+      <span class="dot"/>
 
       <!-- line 5 -->
-      <span></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span></span>
+      <span/>
+      <span class="dot"/>
+      <span class="dot"/>
+      <span class="dot"/>
+      <span class="dot"/>
+      <span class="dot"/>
+      <span class="dot"/>
+      <span class="dot"/>
+      <span/>
 
       <!-- line 6 -->
-      <span></span>
-      <span></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span></span>
-      <span></span>
+      <span/>
+      <span/>
+      <span class="dot"/>
+      <span class="dot"/>
+      <span class="dot"/>
+      <span class="dot"/>
+      <span class="dot"/>
+      <span/>
+      <span/>
 
       <!-- line 7 -->
-      <span></span>
-      <span></span>
-      <span></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span class="dot"></span>
-      <span></span>
-      <span></span>
-      <span></span>
+      <span/>
+      <span/>
+      <span/>
+      <span class="dot"/>
+      <span class="dot"/>
+      <span class="dot"/>
+      <span/>
+      <span/>
+      <span/>
 
       <!-- line 8 -->
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span class="dot"></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
+      <span/>
+      <span/>
+      <span/>
+      <span/>
+      <span class="dot"/>
+      <span/>
+      <span/>
+      <span/>
+      <span/>
     </div>
   </div>
 </template>
-
-<script>
-  export default {}
-</script>
 
 <style lang="less" scoped>
   .view-challenge {

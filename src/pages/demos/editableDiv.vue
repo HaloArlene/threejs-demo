@@ -4,16 +4,16 @@
     <div class="main-page">
 
       <com-editor ref="comEditor" :maxlength="200" :placeholder="'请输入内容...'" :showRemain="true"
-                  @textChange="contentChange"></com-editor>
+                  @textChange="contentChange"/>
 
       <a-popover trigger="click" placement="bottomLeft" v-model="facesVisible">
         <a-button class="icon-button face-btn" @click="faceBtnClick">
-          <i class="iconfont icon-face"></i>
+          <i class="iconfont icon-face"/>
         </a-button>
 
         <div class="face-selector" slot="content">
           <span class="face-item" v-for="(face, i) in faces" :key="'face' + i"
-                :style="{backgroundImage: `url(${face.image})`}" @click="selectFace(face)"></span>
+                :style="{backgroundImage: `url(${face.image})`}" @click="selectFace(face)"/>
         </div>
       </a-popover>
 

@@ -4,8 +4,7 @@
       <a-breadcrumb-item>Home</a-breadcrumb-item>
     </a-breadcrumb>
     <div class="main-page home-page">
-      <diagonal-box class="intro-box" :title="title" :content="introduce"></diagonal-box>
-
+      <diagonal-box class="intro-box" :title="title" :content="introduce"/>
       <com-button class="start-btn" :text="startTxt" @onClick="$router.push('/dailyChallenges')"/>
     </div>
   </div>
@@ -19,8 +18,8 @@
     data() {
       return {
         title: 'What is this?',
-        introduce: 'At the beginning, this project is built to do some study and testing. But now it contains a lot of demos. ' +
-          'If you want to learn about development of web front end, I think this is a good place.',
+        introduce: 'At the beginning, this project is built to do some study and testing. And now it contains a lot of demos. ' +
+          'There are some examples about three.js development. I wish they are helpful.',
         startTxt: 'View Latest Demos'
       }
     }

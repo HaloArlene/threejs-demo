@@ -6,7 +6,6 @@ import router from './router'
 import i18n from "./i18n"
 import store from './store'
 import Antd from 'ant-design-vue'
-console.log(Antd)
 import 'ant-design-vue/dist/antd.css'
 import './assets/icon/iconfont.css'
 

@@ -2,16 +2,12 @@
   <div class="view-challenge">
     <div class="sea">
       <p class="title">the sea</p>
-      <span class="wave"></span>
-      <span class="wave"></span>
-      <span class="wave"></span>
+      <span class="wave"/>
+      <span class="wave"/>
+      <span class="wave"/>
     </div>
   </div>
 </template>
-
-<script>
-  export default {}
-</script>
 
 <style lang="less" scoped>
   .view-challenge {

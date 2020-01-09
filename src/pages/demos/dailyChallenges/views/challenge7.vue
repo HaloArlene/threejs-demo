@@ -2,10 +2,10 @@
   <div class="view-challenge">
     <div class="box">
       <span>BUTTON</span>
-      <span class="top"></span>
-      <span class="bottom"></span>
-      <span class="left"></span>
-      <span class="right"></span>
+      <span class="top"/>
+      <span class="bottom"/>
+      <span class="left"/>
+      <span class="right"/>
     </div>
   </div>
 </template>

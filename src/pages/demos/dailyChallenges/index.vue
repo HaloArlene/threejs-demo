@@ -13,7 +13,7 @@
       </a-layout-sider>
       <a-layout-content>
         <div class="main-page">
-          <component :is="activeView"></component>
+          <component :is="activeView"/>
         </div>
       </a-layout-content>
     </a-layout>
@@ -28,7 +28,7 @@
   export default {
     components: {Breadcrumb, ComButton, ...Challenges},
     data() {
-      const challengeCount = 20; //challenge个数
+      const challengeCount = 21; //challenge个数
       const subMenuCount = Math.ceil(challengeCount / 10);
       let challenges = [];
       for (let i = 0; i < subMenuCount; i++) {

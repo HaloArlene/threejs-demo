@@ -2,28 +2,24 @@
   <div class="view-challenge">
     <section class="four-zero-four">
       <p class="four">
-        <span></span>
-        <span></span>
-        <span></span>
+        <span/>
+        <span/>
+        <span/>
       </p>
       <p class="zero">
-        <span></span>
-        <span></span>
-        <span></span>
-        <span></span>
+        <span/>
+        <span/>
+        <span/>
+        <span/>
       </p>
       <p class="four">
-        <span></span>
-        <span></span>
-        <span></span>
+        <span/>
+        <span/>
+        <span/>
       </p>
     </section>
   </div>
 </template>
-
-<script>
-  export default {}
-</script>
 
 <style lang="less" scoped>
   .view-challenge {
