@@ -1,26 +1,21 @@
 <template>
   <div class="demo-page-progress">
-    <breadcrumb :crumbs="['Demos', 'Wave Progress']"/>
+    <breadcrumb :crumbs="['Demos', 'Wave Progress']" />
 
     <div class="main-page">
-      <wave-progress :type="'circle'"/>
-      <wave-progress :type="'star'"/>
-      <wave-progress :type="'roundRect'"/>
-      <wave-progress :type="'heart'"/>
+      <wave-progress :type="'circle'" />
+      <wave-progress :type="'star'" />
+      <wave-progress :type="'roundRect'" />
+      <wave-progress :type="'heart'" />
     </div>
   </div>
 </template>
 
 <script>
-  import Breadcrumb from "../../components/breadcrumb";
-  import WaveProgress from "../../components/waveProgress/index";
+import Breadcrumb from "../../components/breadcrumb";
+import WaveProgress from "../../components/waveProgress/index";
 
-  export default {
-    components: {Breadcrumb, WaveProgress}
-  }
+export default {
+  components: { Breadcrumb, WaveProgress }
+};
 </script>
-
-<style scoped>
-  .demo-page-progress .main-page {
-  }
-</style>

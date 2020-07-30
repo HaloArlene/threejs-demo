@@ -1,0 +1,70 @@
+<template>
+  <div class="view-challenge">
+    <div class="sky">
+      <div class="sun" />
+      <div class="moon" />
+    </div>
+  </div>
+</template>
+
+<style lang="less" scoped>
+.view-challenge * {
+  animation: 10s linear infinite;
+}
+
+.sky {
+  width: 100vw;
+  height: 100vh;
+  background-color: skyblue;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation-name: animate-sky;
+  position: relative;
+  overflow: hidden;
+}
+
+.sun,
+.moon {
+  position: absolute;
+  width: 50vmin;
+  height: 50vmin;
+  border-radius: 50%;
+}
+
+.sun {
+  background-color: gold;
+  animation-name: animate-sun;
+}
+
+.moon {
+  background-color: slategray;
+  animation-name: animate-moon;
+}
+
+@keyframes animate-sky {
+  50% {
+    background-color: black;
+  }
+}
+
+@keyframes animate-sun {
+  50% {
+    box-shadow: 0 0 5em 1em white;
+  }
+}
+
+@keyframes animate-moon {
+  from {
+    transform: translateX(-100vmin);
+  }
+
+  50% {
+    background-color: black;
+  }
+
+  to {
+    transform: translateX(100vmin);
+  }
+}
+</style>

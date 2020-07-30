@@ -23,20 +23,21 @@
 <script>
   import Breadcrumb from "../../../components/breadcrumb";
   import ComButton from "../../../components/com-button";
-  import Challenges from './views';
+  import components from './views';
+  import {views} from "./views";
 
   export default {
-    components: {Breadcrumb, ComButton, ...Challenges},
+    components: {Breadcrumb, ComButton, ...components},
     data() {
-      const challengeCount = 21; //challenge个数
+      const challengeCount = views.length; //challenge个数
       const subMenuCount = Math.ceil(challengeCount / 10);
       let challenges = [];
       for (let i = 0; i < subMenuCount; i++) {
         let list = [];
         for (let j = i * 10; j < (i + 1) * 10 && j < challengeCount; j++) {
           list.push({
-            name: `Challenge ${j + 1}`,
-            view: `Challenge${j + 1}`
+            name: views[j].name,
+            view: views[j].component
           });
         }
         let subMenuName = '';

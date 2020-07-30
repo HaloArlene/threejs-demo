@@ -23,6 +23,7 @@
 <style lang="less" scoped>
   .view-challenge-1 {
     background: linear-gradient(to bottom, teal, aqua);
+    justify-content: space-around;
   }
 
   .loader-box {
