@@ -13,7 +13,7 @@
     "ant-design-vue": "^1.6.4",
     "glslCanvas": "^0.1.7",
     "stats.js": "^0.17.0",
-    "three": "^0.107.0",
+    "three": "^0.125.0",
     "three-gcode-loader": "^1.0.7",
     "three-orbitcontrols": "^2.110.3",
     "three-stl-loader": "^1.0.6",
